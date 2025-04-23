@@ -59,6 +59,14 @@ const Sidebar = ({ open, toggleSidebar }: SidebarProps) => {
     updateFilter('dateRange', { from: startDate, to: endDate });
   };
 
+  const handleApplyFilters = () => {
+    // Make sure date range is applied before applying all filters
+    if (startDate || endDate) {
+      handleDateRangeChange();
+    }
+    applyFilters();
+  };
+
   const handleReset = () => {
     setStartDate('');
     setEndDate('');
@@ -205,7 +213,7 @@ const Sidebar = ({ open, toggleSidebar }: SidebarProps) => {
         <div className="flex justify-between">
           <Button 
             className="bg-primary hover:bg-primary-dark"
-            onClick={applyFilters}
+            onClick={handleApplyFilters}
           >
             Apply Filters
           </Button>

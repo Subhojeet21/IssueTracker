@@ -149,12 +149,17 @@ const IssueTable = ({ issues, isLoading = false }: IssueTableProps) => {
             </div>
             <Pagination>
               <PaginationContent>
-                <PaginationItem>
-                  <PaginationPrevious
-                    onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-                    disabled={currentPage === 1}
-                  />
-                </PaginationItem>
+                {currentPage > 1 ? (
+                  <PaginationItem>
+                    <PaginationPrevious
+                      onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                    />
+                  </PaginationItem>
+                ) : (
+                  <PaginationItem className="opacity-50">
+                    <PaginationPrevious onClick={() => {}} />
+                  </PaginationItem>
+                )}
                 
                 {/* Generate page numbers */}
                 {Array.from({ length: Math.min(totalPages, 5) }).map((_, i) => {
@@ -185,12 +190,17 @@ const IssueTable = ({ issues, isLoading = false }: IssueTableProps) => {
                   );
                 })}
                 
-                <PaginationItem>
-                  <PaginationNext
-                    onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
-                    disabled={currentPage === totalPages}
-                  />
-                </PaginationItem>
+                {currentPage < totalPages ? (
+                  <PaginationItem>
+                    <PaginationNext
+                      onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+                    />
+                  </PaginationItem>
+                ) : (
+                  <PaginationItem className="opacity-50">
+                    <PaginationNext onClick={() => {}} />
+                  </PaginationItem>
+                )}
               </PaginationContent>
             </Pagination>
           </div>
