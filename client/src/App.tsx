@@ -18,16 +18,6 @@ function Router() {
     <Switch>
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
-      <Route path="/">
-        <AppLayout>
-          <Dashboard />
-        </AppLayout>
-      </Route>
-      <Route path="/issues">
-        <AppLayout>
-          <Issues />
-        </AppLayout>
-      </Route>
       <Route path="/issues/:id">
         {(params) => (
           <AppLayout>
@@ -35,9 +25,19 @@ function Router() {
           </AppLayout>
         )}
       </Route>
+      <Route path="/issues">
+        <AppLayout>
+          <Issues />
+        </AppLayout>
+      </Route>
       <Route path="/analytics">
         <AppLayout>
           <Analytics />
+        </AppLayout>
+      </Route>
+      <Route path="/">
+        <AppLayout>
+          <Dashboard />
         </AppLayout>
       </Route>
       <Route component={NotFound} />
