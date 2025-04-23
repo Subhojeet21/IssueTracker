@@ -1,0 +1,127 @@
+Create a web-based application based on the following instructions:
+**Phase 1: Prototyping (Estimated Time: 2-4 weeks)**
+
+**Objective:** Create an interactive, high-fidelity prototype to visualize the user experience, validate core workflows, and gather early feedback before investing in development.
+
+**Steps:**
+
+1.  **Requirements Refinement & User Flow Mapping:**
+    * Solidify the core user journeys: Logging an issue, viewing the dashboard, filtering issues, changing status, viewing basic reports, user login/authentication.
+    * Define the key information required for each screen.
+    * Map out the navigation flow between different sections of the app.
+
+2.  **Wireframing:**
+    * Create low-fidelity sketches or digital wireframes for key screens:
+        * Login/Sign Up
+        * Dashboard (Issue Overview)
+        * Issue List (with filters/sort options)
+        * Issue Detail View
+        * New Issue Form
+        * Analytics/Reports Screen (basic concept)
+        * User Profile/Settings (basic concept)
+    * Focus on layout, structure, and placement of elements, not visual design.
+
+3.  **UI/UX Design:**
+    * Develop a consistent visual style (colors, typography, iconography).
+    * Create high-fidelity mockups based on the wireframes.
+    * Focus on usability, clarity, and intuitive interaction design. Ensure forms are easy to fill, dashboards are scannable, and actions are clear.
+
+4.  **Interactive Prototype Development:**
+    * Use tools like Figma, Adobe XD, Sketch, or InVision.
+    * Link the high-fidelity screens together to simulate the core user flows identified in Step 1.
+    * Make key elements clickable (buttons, navigation links, form fields) to mimic real application behavior.
+    * *Crucially, demonstrate the flow of logging an issue, assigning priority/category, changing status, and viewing the issue on the dashboard.*
+    * Include a static mockup of the potential Analytics screen to convey the *idea* of data visualization, even if the data isn't dynamic yet.
+
+5.  **Feedback & Iteration:**
+    * Present the interactive prototype to stakeholders and potential end-users.
+    * Gather specific feedback on:
+        * Ease of use and intuitiveness.
+        * Clarity of information presented.
+        * Efficiency of the core workflows (especially issue logging).
+        * Overall look and feel.
+        * Understanding of the proposed analytics.
+    * Analyze feedback and identify areas for improvement.
+    * Iterate on the design and prototype based on feedback. Repeat testing and refinement as needed until the core concept and flow are validated.
+
+**Outcome:** A validated, high-fidelity interactive prototype representing the core user experience of the application, ready to guide MVP development.
+
+---
+
+**Phase 2: Minimum Viable Product (MVP) Development (Estimated Time: 8-16 weeks, depends on team size & platform)**
+
+**Objective:** Convert the validated prototype into a functional application with the essential core features implemented, providing real value to early users and laying the foundation for future enhancements, including more advanced AI.
+
+**Technology Stack Considerations (Example):**
+
+* **Frontend:** React, Vue, or Angular (for Web); React Native or Flutter (for Cross-Platform Mobile)
+* **Backend:** Python (with Flask/Django - good for AI/ML integration), Node.js (with Express - good for real-time features), or Ruby on Rails.
+* **Database:** PostgreSQL (robust, good for relational data and some analytics) or MongoDB (flexible schema).
+* **Cloud Platform:** AWS, Google Cloud, or Azure (for hosting, database, storage, potential AI services).
+* **AI/Analytics Libraries (Backend):** Pandas, NumPy, Scikit-learn (for initial analysis/potential future ML), Matplotlib/Seaborn (for generating chart data).
+* **Charting Library (Frontend):** Chart.js, D3.js, or similar to render visualizations.
+
+**Steps:**
+
+1.  **Setup & Architecture:**
+    * Set up project repositories (Git).
+    * Establish development, staging, and production environments.
+    * Define the basic application architecture (e.g., RESTful API, database schema).
+    * Choose and set up the cloud infrastructure.
+
+2.  **Backend Development (API & Logic):**
+    * Implement secure user authentication and authorization (Login, Registration, Password Management).
+    * Develop API endpoints for CRUD (Create, Read, Update, Delete) operations for:
+        * Issues (including description, category, priority, status, assignments, attachments - basic file upload).
+        * Categories (allow admin to manage).
+        * Tags.
+        * Comments on issues.
+    * Implement logic for user roles and permissions (Admin vs. Regular User for MVP).
+    * Implement basic notification logic (e.g., trigger on assignment, status change).
+    * Develop backend logic for generating basic analytical data (counts, aggregations).
+
+3.  **Frontend Development (UI & Interaction):**
+    * Translate the finalized prototype designs into functional UI components using the chosen frontend framework.
+    * Connect frontend components to the backend APIs.
+    * Implement core screens:
+        * Login/Registration.
+        * **Dashboard:** Display a list of issues; implement basic sorting (e.g., by date, priority) and filtering (e.g., by status, category). Include quick action buttons (e.g., 'Change Status').
+        * **Issue Logging:** Build the form based on the prototype, allowing users to input details, select category/priority, assign (simple user selection), and upload attachments.
+        * **Issue Detail View:** Display all issue information, including history/comments.
+        * **Basic Analytics View:** Display simple charts generated from backend data (e.g., bar chart of issues per category, pie chart of issues by status). Implement basic CSV export.
+    * Implement basic real-time updates or notifications (e.g., update dashboard when an issue status changes).
+
+4.  **AI Integration (MVP Focus - Basic Analytics):**
+    * **Focus:** Descriptive analytics based on logged data.
+    * **Implementation:**
+        * Backend periodically (or on-demand) processes the issue data using libraries like Pandas.
+        * Calculate key metrics: Count of issues by category, priority, status, user assignment. Average time issues stay in 'Open' or 'In Progress' status (basic resolution time indicator).
+        * Expose this aggregated data via dedicated API endpoints.
+        * Frontend uses charting libraries to visualize this data.
+    * *Note: Complex AI predictions (trend forecasting, root cause analysis) are typically deferred post-MVP but the data collection structure should support future analysis.*
+
+5.  **Testing:**
+    * **Unit Testing:** Test individual functions/modules (backend and frontend).
+    * **Integration Testing:** Test the interaction between frontend and backend components (API calls).
+    * **End-to-End Testing:** Simulate user flows to ensure the application works as expected.
+    * **User Acceptance Testing (UAT):** Allow stakeholders/early users to test the MVP in a staging environment.
+
+6.  **Deployment:**
+    * Deploy the functional MVP to the chosen cloud platform.
+    * Set up monitoring and logging.
+
+**Outcome:** A functional web or mobile application incorporating the core features (Issue Logging, Categorization/Prioritization, Basic Dashboard, Basic Analytics & Reporting, User Roles, Basic Notifications) that early adopters can use. It collects valuable data and provides initial analytical insights, setting the stage for future AI enhancements.
+
+---
+
+**Next Steps (Post-MVP):**
+
+* Gather user feedback on the MVP.
+* Prioritize and implement remaining features (e.g., advanced integrations, richer notifications, custom reporting).
+* Iteratively enhance the AI capabilities:
+    * Implement trend analysis and forecasting.
+    * Explore predictive analytics (e.g., predicting resolution times).
+    * Potentially add AI-driven suggestions for categorization or prioritization based on issue descriptions.
+    * Develop more sophisticated visualizations and reporting options.
+* Refine user roles and permissions.
+* Optimize performance and scalability.
