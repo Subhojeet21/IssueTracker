@@ -55,9 +55,15 @@ export async function connectToDatabase() {
   // Initialize the counters if they don't exist
   const collections = ['users', 'issues', 'comments', 'attachments', 'notifications'];
   for (const collection of collections) {
-    const counter = await CounterModel.findById(collection);
-    if (!counter) {
-      await CounterModel.create({ _id: collection, seq: 0 });
+    try {
+      // Use findOneAndUpdate with upsert to avoid race conditions
+      await CounterModel.findOneAndUpdate(
+        { _id: collection },
+        { $setOnInsert: { seq: 0 } },
+        { upsert: true, new: true }
+      );
+    } catch (error) {
+      console.log(`Counter for ${collection} already exists, skipping initialization`);
     }
   }
 
