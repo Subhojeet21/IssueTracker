@@ -115,7 +115,7 @@ const IssueTable = ({ issues, isLoading = false }: IssueTableProps) => {
                   </TableCell>
                   <TableCell>
                     <div className="flex space-x-2">
-                      <Link href={`/issues/${issue.id}`}>
+                      <Link href={`/issues/${issue.id}`} className="inline-block">
                         <Button variant="ghost" size="icon" className="text-primary hover:text-primary-dark">
                           <Eye className="h-4 w-4" />
                         </Button>
