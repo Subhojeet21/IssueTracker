@@ -106,15 +106,15 @@ const IssueDetail = ({
               <div className="space-y-2">
                 <h3 className="text-sm font-medium text-gray-500">Assigned To</h3>
                 <Select 
-                  defaultValue={issue.assigneeId?.toString() || ''} 
-                  onValueChange={(value) => onAssigneeChange(value ? parseInt(value) : null)}
+                  defaultValue={issue.assigneeId?.toString() || 'unassigned'} 
+                  onValueChange={(value) => onAssigneeChange(value !== 'unassigned' ? parseInt(value) : null)}
                   disabled={isPending}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Unassigned" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Unassigned</SelectItem>
+                    <SelectItem value="unassigned">Unassigned</SelectItem>
                     <SelectItem value="1">John Doe</SelectItem>
                     <SelectItem value="2">Alex Taylor</SelectItem>
                     <SelectItem value="3">Jordan Smith</SelectItem>
