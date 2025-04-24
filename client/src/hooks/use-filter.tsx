@@ -39,7 +39,7 @@ export function FilterProvider({ children }: { children: ReactNode }) {
     const cleanedFilters = Object.entries(pendingFilters).reduce<Filters>((acc, [key, value]) => {
       if (value !== undefined && 
           !(Array.isArray(value) && value.length === 0) && 
-          !(typeof value === 'string' && value.trim() === '')) {
+          !(typeof value === 'string' && value.trim() === '' && value !== 'all')) {
         acc[key as keyof Filters] = value;
       }
       return acc;
