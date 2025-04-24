@@ -60,6 +60,7 @@ const IssueTable = ({ issues, isLoading = false }: IssueTableProps) => {
               <TableHead>Status</TableHead>
               <TableHead>Priority</TableHead>
               <TableHead>Category</TableHead>
+              <TableHead>Team</TableHead>
               <TableHead>Assigned To</TableHead>
               <TableHead>Created</TableHead>
               <TableHead>Actions</TableHead>
