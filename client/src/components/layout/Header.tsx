@@ -49,6 +49,8 @@ const Header = ({ toggleSidebar }: HeaderProps) => {
     }
   };
 
+  if (!user) return null;
+
   return (
     <header className="z-30">
       <div className="bg-primary text-white shadow-md">

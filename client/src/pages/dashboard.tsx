@@ -6,6 +6,7 @@ import { PlusIcon } from 'lucide-react';
 import IssueForm from '@/components/issues/IssueForm';
 import { ArrowRightIcon } from 'lucide-react';
 import { Link } from 'wouter';
+import { useAuth } from '@/hooks/use-auth';
 
 interface DashboardData {
   totalIssues: number;
@@ -15,6 +16,7 @@ interface DashboardData {
 }
 
 const Dashboard = () => {
+  const { user, logout } = useAuth();
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   const { data, isLoading, isError } = useQuery<DashboardData>({
@@ -27,6 +29,8 @@ const Dashboard = () => {
       return response.json();
     }
   });
+
+  if (!user) return null;
 
   if (isLoading) {
     return (
@@ -48,6 +52,8 @@ const Dashboard = () => {
       </div>
     );
   }
+
+  if (!user) return null;
 
   return (
     <div className="space-y-6">

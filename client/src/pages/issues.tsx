@@ -9,11 +9,15 @@ import IssueForm from '@/components/issues/IssueForm';
 import { useIssues } from '@/hooks/use-issues';
 import { useFilter } from '@/hooks/use-filter';
 import { getStatusOptions, getPriorityOptions, getCategoryOptions } from '@/lib/utils';
+import { useAuth } from '@/hooks/use-auth';
 
 const Issues = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const { issues, isLoading } = useIssues();
   const { filters, updateFilter } = useFilter();
+  const { user, logout } = useAuth();
+
+  if (!user) return null;
   
   return (
     <div>
