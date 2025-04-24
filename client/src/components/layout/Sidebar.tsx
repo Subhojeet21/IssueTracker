@@ -64,7 +64,7 @@ const Sidebar = () => {
       <div className="p-4 flex flex-col flex-grow">
         <div className="flex items-center mb-8">
           <i className="fas fa-bug text-xl mr-2 text-primary"></i>
-          <span className="text-2xl font-bold text-sidebar-foreground">IssueTrack</span>
+          <span className="text-2xl font-bold text-sidebar-foreground">Issue Tracker</span>
         </div>
 
         <nav className="flex-grow">

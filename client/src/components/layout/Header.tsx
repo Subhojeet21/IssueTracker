@@ -64,7 +64,7 @@ const Header = ({ toggleSidebar }: HeaderProps) => {
             </button>
             <Link href="/" className="flex items-center">
               <i className="fas fa-bug text-xl mr-2"></i>
-              <span className="text-xl font-medium">IssueTrack</span>
+              <span className="text-xl font-medium">Issue Tracker</span>
             </Link>
           </div>
           

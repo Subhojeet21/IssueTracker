@@ -190,7 +190,8 @@ const Settings = () => {
                         id="name"
                         name="name"
                         value={user.fullName}
-                        onChange={handleProfileChange}
+                        onChange={handleProfileChange} 
+                        disabled
                       />
                     </div>
                     
@@ -201,7 +202,8 @@ const Settings = () => {
                         name="email"
                         type="email"
                         value={user.email}
-                        onChange={handleProfileChange}
+                        onChange={handleProfileChange} 
+                        disabled
                       />
                     </div>
                   </div>
@@ -238,14 +240,14 @@ const Settings = () => {
               </div>
             </CardContent>
             <CardFooter className="flex justify-end">
-              <Button onClick={handleSaveProfile} disabled={savingProfile}>
+              {/*<Button onClick={handleSaveProfile} disabled={savingProfile}>
                 {savingProfile ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     Saving...
                   </>
                 ) : "Save Changes"}
-              </Button>
+              </Button>*/}
             </CardFooter>
           </Card>
         </TabsContent>

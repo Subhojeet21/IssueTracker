@@ -37,7 +37,7 @@ const Login = () => {
               <i className="fas fa-bug text-xl"></i>
             </div>
           </div>
-          <CardTitle className="text-2xl font-bold">IssueTrack</CardTitle>
+          <CardTitle className="text-2xl font-bold">Issue Tracker</CardTitle>
           <CardDescription>Enter your credentials to sign in to your account</CardDescription>
         </CardHeader>
         <CardContent>
