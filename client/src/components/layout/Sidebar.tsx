@@ -36,7 +36,7 @@ const Sidebar = () => {
                 href={item.path}
               >
                 <a className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
-                  <i className={`fas fa-${item.icon} w-5`}></i>
+                  <i className={`fas fa-${LayoutDashboard} w-5`}></i>
                   <span className="ml-3">{item.label}</span>
                 </a>
               </Link>
