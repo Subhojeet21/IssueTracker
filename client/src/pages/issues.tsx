@@ -97,7 +97,11 @@ const Issues = () => {
             <Label htmlFor="status-filter">Priority</Label>
             <Select 
               value={filters.priority?.[0] || 'all'}
-              onValueChange={(value) => updateFilter('priority', value === 'all' ? [] : [value])}
+              onValueChange={(value) => {
+                updateFilter('priority', value === 'all' ? [] : [value]);
+                applyFilters();
+              }
+            }
             >
               <SelectTrigger>
                 <SelectValue placeholder="Priority" />
@@ -117,7 +121,11 @@ const Issues = () => {
             <Label htmlFor="status-filter">Category</Label>
             <Select 
               value={filters.category || 'all'}
-              onValueChange={(value) => updateFilter('category', value === 'all' ? '' : value)}
+              onValueChange={(value) => {
+                updateFilter('category', value === 'all' ? '' : value);
+                applyFilters();
+              }
+            }
             >
               <SelectTrigger>
                 <SelectValue placeholder="Category" />
@@ -136,14 +144,18 @@ const Issues = () => {
           <div className="space-y-2">
             <Label htmlFor="status-filter">Assigned To</Label>
             <Select 
-              value={filters.assignee || 'anyone'}
-              onValueChange={(value) => updateFilter('assignee', value === 'anyone' ? '' : value)}
+              value={filters.assignee || 'all'}
+              onValueChange={(value) => {
+                updateFilter('assignee', value === 'all' ? '' : value);
+                applyFilters();
+              }
+            }
             >
               <SelectTrigger>
                 <SelectValue placeholder="Assigned To" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="anyone">Anyone</SelectItem>
+                <SelectItem value="all">Anyone</SelectItem>
                 <SelectItem value="me">Me</SelectItem>
                 <SelectItem value="unassigned">Unassigned</SelectItem>
               </SelectContent>
@@ -154,7 +166,11 @@ const Issues = () => {
           <Label htmlFor="status-filter">Team Name</Label>
             <Select 
               value={filters.team || 'all'}
-              onValueChange={(value) => updateFilter('team', value === 'all' ? '' : value)}
+              onValueChange={(value) => {
+                updateFilter('team', value === 'all' ? '' : value);
+                applyFilters();
+              }
+            }
             >
               <SelectTrigger>
                 <SelectValue placeholder="Team Name" />
