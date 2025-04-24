@@ -1,3 +1,4 @@
+
 import { useState, useCallback, createContext, useContext, ReactNode } from 'react';
 
 export interface Filters {
@@ -29,12 +30,21 @@ export function FilterProvider({ children }: { children: ReactNode }) {
   const updateFilter = useCallback((key: keyof Filters, value: any) => {
     setPendingFilters(prev => ({
       ...prev,
-      [key]: value
+      [key]: value === '' || (Array.isArray(value) && value.length === 0) ? undefined : value
     }));
   }, []);
   
   const applyFilters = useCallback(() => {
-    setFilters(pendingFilters);
+    const cleanedFilters = Object.entries(pendingFilters).reduce((acc, [key, value]) => {
+      if (value !== undefined && 
+          !(Array.isArray(value) && value.length === 0) && 
+          !(typeof value === 'string' && value.trim() === '')) {
+        acc[key] = value;
+      }
+      return acc;
+    }, {} as Filters);
+    
+    setFilters(cleanedFilters);
   }, [pendingFilters]);
   
   const resetFilters = useCallback(() => {
