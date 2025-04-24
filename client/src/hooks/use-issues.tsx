@@ -23,7 +23,7 @@ export function useIssues() {
     }
     
     // Category filter
-    if (filters.category && issue.category !== filters.category) {
+    if (filters.category && filters.category.length > 0 && !filters.category.includes(issue.category)) {
       return false;
     }
 
