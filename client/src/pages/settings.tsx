@@ -7,19 +7,23 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import { Separator } from '@/components/ui/separator';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+//import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 //import { toast } from '@/components/ui/use-toast';
 import { useToast } from "@/hooks/use-toast";
-import { Loader2 } from 'lucide-react';
+import { Loader2, UserCheckIcon } from 'lucide-react';
+import { useAuth } from '@/hooks/use-auth';
+import { Link } from 'wouter';
+import Avatar from 'react-avatar';
 
 const Settings = () => {
   const { toast } = useToast();
+  const { user, logout } = useAuth();
   // User profile state
   const [profileForm, setProfileForm] = useState({
-    name: 'John Doe',
-    email: 'john@example.com',
-    role: 'Administrator',
-    bio: 'Product manager with a focus on user experience and team collaboration.',
+    //name: 'John Doe',
+    //email: 'john@example.com',
+    //role: 'Administrator',
+    //bio: 'Product manager with a focus on user experience and team collaboration.',
   });
   
   // Notification settings state
@@ -140,6 +144,8 @@ const Settings = () => {
       description: "Your display preferences have been updated",
     });
   };
+
+  if (!user) return null;
   
   return (
     <div className="space-y-8">
@@ -164,13 +170,18 @@ const Settings = () => {
             <CardContent className="space-y-6">
               <div className="flex flex-col items-center sm:flex-row sm:items-start sm:gap-8">
                 <div className="flex flex-col items-center mb-6 sm:mb-0">
-                  <Avatar className="h-24 w-24">
+                  {/*<Avatar>
                     <AvatarImage src="https://github.com/shadcn.png" />
-                    <AvatarFallback>JD</AvatarFallback>
+                    <AvatarFallback>{user.fullName}</AvatarFallback>
                   </Avatar>
                   <Button variant="outline" className="mt-4 text-sm">
                     Change Avatar
-                  </Button>
+                  </Button>*/}
+                  {user && (
+                    <Link to="/profile">
+                      <Avatar name={user.fullName} size="40" round={true} />
+                    </Link>
+                  )}
                 </div>
                 
                 <div className="space-y-4 flex-1">
@@ -180,7 +191,7 @@ const Settings = () => {
                       <Input
                         id="name"
                         name="name"
-                        value={profileForm.name}
+                        value={user.fullName}
                         onChange={handleProfileChange}
                       />
                     </div>
@@ -191,7 +202,7 @@ const Settings = () => {
                         id="email"
                         name="email"
                         type="email"
-                        value={profileForm.email}
+                        value={user.email}
                         onChange={handleProfileChange}
                       />
                     </div>
@@ -202,12 +213,12 @@ const Settings = () => {
                     <Input
                       id="role"
                       name="role"
-                      value={profileForm.role}
+                      value="Team Member"
                       onChange={handleProfileChange}
                       disabled
                     />
                     <p className="text-xs text-muted-foreground">
-                      Your role cannot be changed from this page
+                      Your role cannot be changed from this page. Please contact admin.
                     </p>
                   </div>
                   
@@ -217,9 +228,12 @@ const Settings = () => {
                       id="bio"
                       name="bio"
                       className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                      value={profileForm.bio}
+                      value=""
                       onChange={handleProfileChange}
                     />
+                    <p className="text-xs text-muted-foreground">
+                      Your bio cannot be changed from this page. Please contact admin.
+                    </p>
                   </div>
                 </div>
               </div>

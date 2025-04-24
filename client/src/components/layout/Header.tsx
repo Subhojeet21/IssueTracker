@@ -142,7 +142,7 @@ const Header = ({ toggleSidebar }: HeaderProps) => {
                     {user?.fullName?.split(' ').map(n => n[0]).join('').toUpperCase() || 'JD'}
                   </span>
                 </div>
-                <span className="hidden md:inline mr-1">{user?.fullName || 'John Doe'}</span>
+                <span className="hidden md:inline mr-1">{user?.fullName || ''}</span>
                 <i className="fas fa-chevron-down text-xs"></i>
               </button>
               
