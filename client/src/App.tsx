@@ -8,7 +8,7 @@ import Dashboard from "@/pages/dashboard";
 import Issues from "@/pages/issues";
 import IssueDetail from "@/pages/issue-detail";
 import Analytics from "@/pages/analytics";
-import Settings from "@/pages/Settings";
+import Settings from "@/pages/settings";
 import Login from "@/pages/login";
 import Register from "@/pages/register";
 import { AuthProvider } from "@/hooks/use-auth";
