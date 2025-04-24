@@ -194,33 +194,61 @@ const IssueForm = ({ open, onClose }: IssueFormProps) => {
               />
             </div>
 
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <FormField
-              control={form.control}
-              name="assigneeId"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Assign To</FormLabel>
-                  <Select
-                    onValueChange={(value) => field.onChange(value === "unassigned" ? undefined : parseInt(value))}
-                    value={field.value?.toString() || "unassigned"}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select team member" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="unassigned">Unassigned</SelectItem>
-                      <SelectItem value="1">John Doe</SelectItem>
-                      <SelectItem value="2">Alex Taylor</SelectItem>
-                      <SelectItem value="3">Jordan Smith</SelectItem>
-                      <SelectItem value="4">Casey Jones</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                control={form.control}
+                name="assigneeId"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Team Name</FormLabel>
+                    <Select
+                      onValueChange={(value) => field.onChange(value === "unassigned" ? undefined : parseInt(value))}
+                      value={field.value?.toString() || "unassigned"}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select team" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="unassigned">Unassigned</SelectItem>
+                        <SelectItem value="compass">Compass</SelectItem>
+                        <SelectItem value="meta">Meta</SelectItem>
+                        <SelectItem value="everest">Everest</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="assigneeId"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Assign To</FormLabel>
+                    <Select
+                      onValueChange={(value) => field.onChange(value === "unassigned" ? undefined : parseInt(value))}
+                      value={field.value?.toString() || "unassigned"}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select team member" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="unassigned">Unassigned</SelectItem>
+                        <SelectItem value="1">John Doe</SelectItem>
+                        <SelectItem value="2">Alex Taylor</SelectItem>
+                        <SelectItem value="3">Jordan Smith</SelectItem>
+                        <SelectItem value="4">Casey Jones</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <FormItem>
               <FormLabel>Attachments</FormLabel>
