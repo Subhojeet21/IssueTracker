@@ -203,8 +203,8 @@ const IssueForm = ({ open, onClose }: IssueFormProps) => {
                   <FormItem>
                     <FormLabel>Team Name</FormLabel>
                     <Select
-                      onValueChange={(value) => field.onChange(value === "unassigned" ? undefined : value)}
-                      value={field.value?.toString() || "unassigned"}
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
@@ -212,7 +212,6 @@ const IssueForm = ({ open, onClose }: IssueFormProps) => {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="unassigned">Unassigned</SelectItem>
                         <SelectItem value="compass">Compass</SelectItem>
                         <SelectItem value="meta">Meta</SelectItem>
                         <SelectItem value="everest">Everest</SelectItem>
