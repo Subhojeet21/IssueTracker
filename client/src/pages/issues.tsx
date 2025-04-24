@@ -22,9 +22,10 @@ const Issues = () => {
       updateFilter('search', '');
       updateFilter('status', []);
       updateFilter('priority', []);
-      updateFilter('category', []);
-      updateFilter('assignee', []);
-      updateFilter('team', []); 
+      updateFilter('category', '');
+      updateFilter('assignee', '');
+      updateFilter('team', ''); 
+      applyFilters();
   };
 
   if (!user) return null;
