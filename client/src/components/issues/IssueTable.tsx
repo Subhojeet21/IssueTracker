@@ -75,9 +75,9 @@ const IssueTable = ({ issues, isLoading = false }: IssueTableProps) => {
             ) : (
               paginatedIssues.map((issue) => (
                 <TableRow key={issue.id} className="hover:bg-gray-50">
-                  <TableCell className="font-medium text-primary">
+                  {/*<TableCell className="font-medium text-primary">
                     {generateIssueId(issue.id)}
-                  </TableCell>
+                  </TableCell>*/}
                   <TableCell className="max-w-xs truncate">
                     {issue.title}
                   </TableCell>
