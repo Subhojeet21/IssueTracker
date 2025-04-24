@@ -112,7 +112,9 @@ export type InsertNotification = z.infer<typeof insertNotificationSchema>;
 export const PRIORITY_VALUES = ['high', 'medium', 'low'] as const;
 export const STATUS_VALUES = ['open', 'in_progress', 'resolved', 'closed'] as const;
 export const CATEGORY_VALUES = ['bug', 'feature', 'documentation', 'security', 'performance'] as const;
+export const TEAM_VALUES = ['compass', 'meta', 'everest'] as const;
 
 export type Priority = (typeof PRIORITY_VALUES)[number];
 export type Status = (typeof STATUS_VALUES)[number];
 export type Category = (typeof CATEGORY_VALUES)[number];
+export type Team = (typeof TEAM_VALUES)[number];
