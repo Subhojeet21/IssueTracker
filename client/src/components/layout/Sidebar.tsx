@@ -21,7 +21,7 @@ const Sidebar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <aside className="w-64 bg-white shadow-md flex flex-col h-screen fixed left-0">
+    <aside className="w-64 bg-[hsl(222,47%,11%)] shadow-md flex flex-col h-screen fixed left-0">
       <div className="p-4 flex flex-col flex-grow">
         <div className="flex items-center mb-8">
           <i className="fas fa-bug text-xl mr-2 text-primary"></i>
