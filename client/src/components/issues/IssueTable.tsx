@@ -55,7 +55,7 @@ const IssueTable = ({ issues, isLoading = false }: IssueTableProps) => {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-20">ID</TableHead>
+              {/*<TableHead className="w-20">ID</TableHead>*/}
               <TableHead>Title</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Priority</TableHead>
