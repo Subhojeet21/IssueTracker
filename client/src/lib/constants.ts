@@ -19,6 +19,12 @@ export const CATEGORY_LABELS = {
   performance: 'Performance',
 };
 
+export const TEAM_LABELS = {
+  compass: 'Compass',
+  meta: 'Meta',
+  everest: 'Everest'
+};
+
 export const NAV_ITEMS = [
   { 
     path: '/', 
