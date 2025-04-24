@@ -8,7 +8,7 @@ import IssueTable from '@/components/issues/IssueTable';
 import IssueForm from '@/components/issues/IssueForm';
 import { useIssues } from '@/hooks/use-issues';
 import { useFilter } from '@/hooks/use-filter';
-import { getStatusOptions, getPriorityOptions, getCategoryOptions } from '@/lib/utils';
+import { getStatusOptions, getPriorityOptions, getCategoryOptions, getTeamOptions } from '@/lib/utils';
 import { useAuth } from '@/hooks/use-auth';
 
 const Issues = () => {
@@ -105,6 +105,24 @@ const Issues = () => {
               <SelectItem value="anyone">Anyone</SelectItem>
               <SelectItem value="me">Me</SelectItem>
               <SelectItem value="unassigned">Unassigned</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="grid grid-cols-5 gap-4">
+          <Select 
+            value={filters.team || 'all'}
+            onValueChange={(value) => updateFilter('assignee', value === 'anyone' ? '' : value)}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Team Name" />
+            </SelectTrigger>
+            <SelectContent>
+            <SelectItem value="all">All Teams</SelectItem>
+              {getTeamOptions().map(team => (
+                <SelectItem key={team.value} value={team.value}>
+                  {team.label}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </div>
