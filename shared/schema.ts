@@ -27,7 +27,7 @@ export const issues = pgTable("issues", {
   status: statusEnum("status").notNull().default('open'),
   priority: priorityEnum("priority").notNull(),
   category: categoryEnum("category").notNull(),
-  team: teamEnum().notNull(),
+  team: teamEnum("team").notNull(),
   assigneeId: integer("assignee_id").references(() => users.id),
   reporterId: integer("reporter_id").references(() => users.id).notNull(),
   createdAt: timestamp("created_at").defaultNow(),
