@@ -41,12 +41,12 @@ const Sidebar = () => {
         </nav>
 
         <div className="mt-auto">
-          <LogOut size={20} className="mr-3" />
           <Button 
             onClick={logout}
             variant="ghost" 
             className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50"
           >
+            <LogOut size={20} className="mr-3" />
             <i className="fas fa-sign-out-alt mr-2"></i>
             Logout
           </Button>
