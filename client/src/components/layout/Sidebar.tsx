@@ -82,7 +82,7 @@ const Sidebar = () => {
             to="/dashboard" 
             icon={LayoutDashboard} 
             label="Dashboard" 
-            isActive={isActive('/dashboard')} 
+            isActive={isActive('/')} 
             isMobileMenuOpen={isMobileMenuOpen}
             onClick={closeMobileMenu}
           />
