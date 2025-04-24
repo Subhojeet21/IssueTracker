@@ -94,15 +94,15 @@ const IssueTable = ({ issues, isLoading = false }: IssueTableProps) => {
                     {issue.assigneeId ? (
                       <div className="flex items-center">
                         <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 font-medium text-sm">
-                          {issue.assigneeId === 1 ? 'JD' : 
-                           issue.assigneeId === 2 ? 'AT' : 
-                           issue.assigneeId === 3 ? 'JS' : 'CJ'}
+                          {issue.assigneeId === 1 ? 'S' : 
+                           issue.assigneeId === 2 ? 'T' : 
+                           issue.assigneeId === 3 ? 'A' : 'M'}
                         </div>
                         <div className="ml-3">
                           <p className="text-sm text-gray-900 whitespace-nowrap">
-                            {issue.assigneeId === 1 ? 'John Doe' : 
-                             issue.assigneeId === 2 ? 'Alex Taylor' : 
-                             issue.assigneeId === 3 ? 'Jordan Smith' : 'Casey Jones'}
+                            {issue.assigneeId === 1 ? 'Subhojeet' : 
+                             issue.assigneeId === 2 ? 'Tariq' : 
+                             issue.assigneeId === 3 ? 'Anjireddy' : 'Manohar'}
                           </p>
                         </div>
                       </div>

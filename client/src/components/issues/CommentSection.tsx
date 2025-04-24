@@ -21,10 +21,10 @@ const CommentSection = ({
   
   // Map user IDs to names (in a real app, this would come from the API)
   const userNames: Record<number, string> = {
-    1: 'John Doe',
-    2: 'Alex Taylor',
-    3: 'Jordan Smith',
-    4: 'Casey Jones',
+    1: 'Subhojeet',
+    2: 'Tariq',
+    3: 'Anjireddy',
+    4: 'Manohar',
   };
   
   const handleSubmit = () => {

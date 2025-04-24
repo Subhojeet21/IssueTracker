@@ -197,7 +197,7 @@ const IssueForm = ({ open, onClose }: IssueFormProps) => {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <FormField
                 control={form.control}
-                name="assigneeId"
+                name="team"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Team Name</FormLabel>
@@ -238,10 +238,10 @@ const IssueForm = ({ open, onClose }: IssueFormProps) => {
                       </FormControl>
                       <SelectContent>
                         <SelectItem value="unassigned">Unassigned</SelectItem>
-                        <SelectItem value="1">John Doe</SelectItem>
-                        <SelectItem value="2">Alex Taylor</SelectItem>
-                        <SelectItem value="3">Jordan Smith</SelectItem>
-                        <SelectItem value="4">Casey Jones</SelectItem>
+                        <SelectItem value="1">Subhojeet</SelectItem>
+                        <SelectItem value="2">Tariq</SelectItem>
+                        <SelectItem value="3">Anjireddy</SelectItem>
+                        <SelectItem value="4">Manohar</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />

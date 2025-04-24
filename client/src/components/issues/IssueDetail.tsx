@@ -33,10 +33,10 @@ const IssueDetail = ({
   
   // Map user IDs to names (in a real app, this would come from the API)
   const userNames: Record<number, string> = {
-    1: 'John Doe',
-    2: 'Alex Taylor',
-    3: 'Jordan Smith',
-    4: 'Casey Jones',
+    1: 'Subhojeet',
+    2: 'Tariq',
+    3: 'Anjireddy',
+    4: 'Manohar',
   };
   
   const reporterName = issue.reporterId ? userNames[issue.reporterId] || 'Unknown' : 'Unknown';
@@ -115,10 +115,10 @@ const IssueDetail = ({
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="unassigned">Unassigned</SelectItem>
-                    <SelectItem value="1">John Doe</SelectItem>
-                    <SelectItem value="2">Alex Taylor</SelectItem>
-                    <SelectItem value="3">Jordan Smith</SelectItem>
-                    <SelectItem value="4">Casey Jones</SelectItem>
+                    <SelectItem value="1">Subhojeet</SelectItem>
+                    <SelectItem value="2">Tariq</SelectItem>
+                    <SelectItem value="3">Anjireddy</SelectItem>
+                    <SelectItem value="4">Manohar</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

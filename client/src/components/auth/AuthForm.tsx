@@ -70,7 +70,7 @@ const AuthForm = ({ type, onSubmit, isSubmitting = false }: AuthFormProps) => {
                 <FormControl>
                   <Input 
                     {...field} 
-                    placeholder="John Doe" 
+                    placeholder="Your Fullname" 
                     disabled={isSubmitting}
                     autoComplete="name"
                   />
@@ -90,7 +90,7 @@ const AuthForm = ({ type, onSubmit, isSubmitting = false }: AuthFormProps) => {
               <FormControl>
                 <Input 
                   {...field} 
-                  placeholder="johndoe" 
+                  placeholder="yourname" 
                   disabled={isSubmitting}
                   autoComplete={isLogin ? "username" : "new-username"}
                 />
@@ -111,7 +111,7 @@ const AuthForm = ({ type, onSubmit, isSubmitting = false }: AuthFormProps) => {
                   <Input 
                     {...field} 
                     type="email" 
-                    placeholder="john.doe@example.com" 
+                    placeholder="your@email.com" 
                     disabled={isSubmitting}
                     autoComplete="email"
                   />
