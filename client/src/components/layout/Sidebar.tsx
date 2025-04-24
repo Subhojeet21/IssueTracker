@@ -114,12 +114,14 @@ const Sidebar = () => {
 
         <div className="mt-auto">
           <Button 
-            onClick={logout}
+            onClick={() => {
+              logout();
+              window.location.href = '/login';
+            }}
             variant="ghost" 
             className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50"
           >
             <LogOut size={20} className="mr-3" />
-            <i className="fas fa-sign-out-alt mr-2"></i>
             Logout
           </Button>
           <div className="flex items-center justify-between mt-4 p-2 rounded-md bg-sidebar-accent/50">
