@@ -18,7 +18,15 @@ const Issues = () => {
   const { filters, updateFilter } = useFilter();
   const { user, logout } = useAuth();
 
+  const handleResetFilters = () => {
+    Object.keys(filters).forEach(key => {
+      updateFilter(key as keyof typeof filters, '');
+    });  
+  };
+
   if (!user) return null;
+
+  const hasActiveFilters = filters.search || filters.status || filters.priority || filters.category || filters.assignee || filters.team;
   
   return (
     <div>
@@ -43,6 +51,21 @@ const Issues = () => {
             value={filters.search || ''}
             onChange={(e) => updateFilter('search', e.target.value)}
           />
+
+          {hasActiveFilters && (
+            <div className="flex justify-end">          
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleResetFilters}            
+                className="text-muted-foreground"
+              >
+                {/*<X className="mr-2 h-4 w-4" />*/}
+                <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                Clear filters
+              </Button>
+            </div>
+          )}
         </div>
 
         <div className="grid grid-cols-5 gap-4">
@@ -155,5 +178,4 @@ const Issues = () => {
     </div>
   );
 };
-
 export default Issues;
