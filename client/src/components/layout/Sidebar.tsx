@@ -79,7 +79,7 @@ const Sidebar = () => {
             ))}
           </div>*/}
           <NavItem 
-            to="/dashboard" 
+            to="/" 
             icon={LayoutDashboard} 
             label="Dashboard" 
             isActive={isActive('/')} 
