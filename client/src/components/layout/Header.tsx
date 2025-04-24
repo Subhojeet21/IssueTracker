@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { NAV_ITEMS } from '@/lib/constants';
 import { Notification } from '@shared/schema';
 import { formatDateTime } from '@/lib/utils';
+import { queryClient, apiRequest } from "@/lib/queryClient";
 
 interface HeaderProps {
   toggleSidebar: () => void;
