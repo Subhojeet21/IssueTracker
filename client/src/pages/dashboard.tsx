@@ -89,7 +89,8 @@ const Dashboard = () => {
 
         <Card className="p-4 space-y-1">
           <div className="text-sm text-gray-500">Completion</div>
-          <div className="text-2xl font-semibold">{data.completionRate || 'NaN'}%</div>
+          <div className="text-2xl font-semibold">
+            {data.totalIssues ? Math.round(((data.totalIssues - data.openIssues) / data.totalIssues) * 100) : 0}%</div>
           <div className="text-xs text-gray-400">Resolution rate</div>
         </Card>
       </div>
