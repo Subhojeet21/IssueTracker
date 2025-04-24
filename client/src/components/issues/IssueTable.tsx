@@ -120,12 +120,12 @@ const IssueTable = ({ issues, isLoading = false }: IssueTableProps) => {
                           <Eye className="h-4 w-4" />
                         </Button>
                       </Link>
-                      <Button variant="ghost" size="icon" className="text-gray-500 hover:text-gray-700">
+                      {/*<Button variant="ghost" size="icon" className="text-gray-500 hover:text-gray-700">
                         <Edit className="h-4 w-4" />
                       </Button>
                       <Button variant="ghost" size="icon" className="text-gray-500 hover:text-gray-700">
                         <UserPlus className="h-4 w-4" />
-                      </Button>
+                      </Button>*/}
                     </div>
                   </TableCell>
                 </TableRow>
