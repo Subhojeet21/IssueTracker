@@ -26,6 +26,13 @@ export function useIssues() {
     if (filters.category && issue.category !== filters.category) {
       return false;
     }
+
+    // Team filter
+    if (
+      filters.team && filters.team.length > 0 && !filters.team.includes(issue.team)
+    ) {
+      return false;
+    }
     
     // Assignee filter
     if (filters.assignee) {
