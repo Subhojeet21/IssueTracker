@@ -16,20 +16,56 @@ import {
   PlusCircle
 } from 'lucide-react';
 
+type NavItemProps = {
+  to: string;
+  icon: React.ElementType;
+  label: string;
+  isActive: boolean;
+  isMobileMenuOpen: boolean;
+  onClick?: () => void;
+};
+
+const NavItem = ({ to, icon: Icon, label, isActive, isMobileMenuOpen, onClick }: NavItemProps) => (
+  <Link
+    to={to}
+    className={cn(
+      "flex items-center gap-3 px-3 py-2 rounded-md transition-colors",
+      isActive ? "bg-sidebar-accent text-sidebar-accent-foreground" : "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent/50"
+    )}
+    onClick={onClick}
+  >
+    <Icon size={20} />
+    <span className={cn("transition-opacity", 
+      isMobileMenuOpen ? "opacity-100" : "opacity-0 md:opacity-100"
+    )}>
+      {label}
+    </span>
+  </Link>
+);
+
 const Sidebar = () => {
   const { logout } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isActive = (path: string) => {
+    return location.pathname === path;
+  };
+
+  const closeMobileMenu = () => {
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+    }
+  };
 
   return (
     <aside className="w-64 bg-white shadow-md flex flex-col h-screen fixed left-0">
       <div className="p-4 flex flex-col flex-grow">
         <div className="flex items-center mb-8">
           <i className="fas fa-bug text-xl mr-2 text-primary"></i>
-          <span className="text-xl font-medium">IssueTrack</span>
+          <span className="text-2xl font-bold text-sidebar-foreground">IssueTrack</span>
         </div>
 
         <nav className="flex-grow">
-          <div className="space-y-2">
+          {/*<div className="space-y-2">
             {NAV_ITEMS.map((item) => (
               <Link 
                 key={item.path} 
@@ -41,7 +77,39 @@ const Sidebar = () => {
                 </a>
               </Link>
             ))}
-          </div>
+          </div>*/}
+          <NavItem 
+            to="/dashboard" 
+            icon={LayoutDashboard} 
+            label="Dashboard" 
+            isActive={isActive('/dashboard')} 
+            isMobileMenuOpen={isMobileMenuOpen}
+            onClick={closeMobileMenu}
+          />
+          <NavItem 
+            to="/issues" 
+            icon={ListTodo} 
+            label="Issues" 
+            isActive={isActive('/issues') || isActive('/issues/new') || location.pathname.includes('/issues/')} 
+            isMobileMenuOpen={isMobileMenuOpen}
+            onClick={closeMobileMenu}
+          />
+          <NavItem 
+            to="/analytics" 
+            icon={BarChart3} 
+            label="Analytics" 
+            isActive={isActive('/analytics')} 
+            isMobileMenuOpen={isMobileMenuOpen}
+            onClick={closeMobileMenu}
+          />
+          <NavItem 
+            to="/settings" 
+            icon={Settings} 
+            label="Settings" 
+            isActive={isActive('/settings')} 
+            isMobileMenuOpen={isMobileMenuOpen}
+            onClick={closeMobileMenu}
+          />
         </nav>
 
         <div className="mt-auto">
