@@ -8,13 +8,7 @@ import { useToast } from '@/hooks/use-toast';
 
 const Login = () => {
   const [location, navigate] = useLocation();
-  const { login, isLoading, user } = useAuth();
-
-  // Redirect if already logged in
-  if (user && !isLoading) {
-    navigate('/');
-    return null;
-  }
+  const { login, isLoading } = useAuth();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   

@@ -9,13 +9,7 @@ import { InsertUser } from '@shared/schema';
 
 const Register = () => {
   const [location, navigate] = useLocation();
-  const { register, isLoading, user } = useAuth();
-
-  // Redirect if already logged in
-  if (user && !isLoading) {
-    navigate('/');
-    return null;
-  }
+  const { register, isLoading } = useAuth();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   
