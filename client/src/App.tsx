@@ -11,6 +11,7 @@ import Analytics from "@/pages/analytics";
 import Login from "@/pages/login";
 import Register from "@/pages/register";
 import { AuthProvider } from "@/hooks/use-auth";
+import { FilterProvider } from "@/hooks/use-filter";
 import AppLayout from "@/components/layout/AppLayout";
 
 function Router() {
@@ -51,7 +52,9 @@ function App() {
       <AuthProvider>
         <TooltipProvider>
           <Toaster />
-          <Router />
+          <FilterProvider>
+            <Router />
+          </FilterProvider>
         </TooltipProvider>
       </AuthProvider>
     </QueryClientProvider>

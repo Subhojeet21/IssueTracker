@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useFilter } from '@/hooks/use-filter';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -24,8 +25,23 @@ const Analytics = () => {
   const [timeRange, setTimeRange] = useState('30');
   const [activeTab, setActiveTab] = useState('overview');
   
+  const { filters } = useFilter();
   const { data, isLoading, isError } = useQuery<AnalyticsData>({
-    queryKey: ['/api/analytics/summary'],
+    queryKey: ['/api/analytics/summary', filters],
+    queryFn: async () => {
+      const params = new URLSearchParams();
+      if (filters.status?.length) params.append('status', filters.status.join(','));
+      if (filters.priority?.length) params.append('priority', filters.priority.join(','));
+      if (filters.category) params.append('category', filters.category);
+      if (filters.assignee) params.append('assignee', filters.assignee);
+      if (filters.dateRange?.from) params.append('from', filters.dateRange.from);
+      if (filters.dateRange?.to) params.append('to', filters.dateRange.to);
+      if (timeRange) params.append('timeRange', timeRange);
+      
+      const response = await fetch(`/api/analytics/summary?${params.toString()}`);
+      if (!response.ok) throw new Error('Failed to fetch analytics');
+      return response.json();
+    }
   });
   
   const handleExportCSV = () => {

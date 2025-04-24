@@ -1,4 +1,5 @@
-import { useState, useCallback } from 'react';
+
+import { useState, useCallback, createContext, useContext, ReactNode } from 'react';
 
 export interface Filters {
   status?: string[];
@@ -12,19 +13,38 @@ export interface Filters {
   search?: string;
 }
 
-export function useFilter() {
+interface FilterContextType {
+  filters: Filters;
+  pendingFilters: Filters;
+  updateFilter: (key: keyof Filters, value: any) => void;
+  applyFilters: () => void;
+  resetFilters: () => void;
+}
+
+const FilterContext = createContext<FilterContextType | undefined>(undefined);
+
+export function FilterProvider({ children }: { children: ReactNode }) {
   const [filters, setFilters] = useState<Filters>({});
   const [pendingFilters, setPendingFilters] = useState<Filters>({});
   
   const updateFilter = useCallback((key: keyof Filters, value: any) => {
     setPendingFilters(prev => ({
       ...prev,
-      [key]: value
+      [key]: value === '' || (Array.isArray(value) && value.length === 0) ? undefined : value
     }));
   }, []);
   
   const applyFilters = useCallback(() => {
-    setFilters(pendingFilters);
+    const cleanedFilters = Object.entries(pendingFilters).reduce((acc, [key, value]) => {
+      if (value !== undefined && 
+          !(Array.isArray(value) && value.length === 0) && 
+          !(typeof value === 'string' && value.trim() === '')) {
+        acc[key] = value;
+      }
+      return acc;
+    }, {} as Filters);
+    
+    setFilters(cleanedFilters);
   }, [pendingFilters]);
   
   const resetFilters = useCallback(() => {
@@ -32,11 +52,23 @@ export function useFilter() {
     setPendingFilters({});
   }, []);
   
-  return {
-    filters,
-    pendingFilters,
-    updateFilter,
-    applyFilters,
-    resetFilters
-  };
+  return (
+    <FilterContext.Provider value={{
+      filters,
+      pendingFilters,
+      updateFilter,
+      applyFilters,
+      resetFilters
+    }}>
+      {children}
+    </FilterContext.Provider>
+  );
+}
+
+export function useFilter() {
+  const context = useContext(FilterContext);
+  if (context === undefined) {
+    throw new Error('useFilter must be used within a FilterProvider');
+  }
+  return context;
 }
