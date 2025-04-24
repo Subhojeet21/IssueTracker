@@ -178,9 +178,7 @@ const Settings = () => {
                     Change Avatar
                   </Button>*/}
                   {user && (
-                    <Link to="/profile">
-                      <Avatar name={user.fullName} size="40" round={true} />
-                    </Link>
+                    <Avatar name={user.fullName} size="80" round={true} />
                   )}
                 </div>
                 
