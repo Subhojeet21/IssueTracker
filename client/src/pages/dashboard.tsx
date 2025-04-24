@@ -25,7 +25,14 @@ const Dashboard = () => {
   const [categoryTimeRange, setCategoryTimeRange] = useState('7');
   
   const { data, isLoading, isError } = useQuery<DashboardData>({
-    queryKey: ['/api/analytics/summary'],
+    queryKey: ['/api/analytics/summary', statusTimeRange, categoryTimeRange],
+    queryFn: async () => {
+      const response = await fetch(`/api/analytics/summary?timeRange=${statusTimeRange}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    }
   });
   
   if (isLoading) {

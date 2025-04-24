@@ -17,7 +17,7 @@ export const StatusChart = ({ data, timeRange, onTimeRangeChange }: StatusChartP
   const chartInstance = useRef<Chart | null>(null);
 
   useEffect(() => {
-    if (!chartRef.current) return;
+    if (!chartRef.current || !data) return;
 
     const statusLabels = Object.keys(data).map(key => STATUS_LABELS[key as keyof typeof STATUS_LABELS]);
     const statusCounts = Object.values(data);
@@ -110,7 +110,7 @@ export const CategoryChart = ({ data, timeRange, onTimeRangeChange }: CategoryCh
   const chartInstance = useRef<Chart | null>(null);
 
   useEffect(() => {
-    if (!chartRef.current) return;
+    if (!chartRef.current || !data) return;
 
     const categoryLabels = Object.keys(data).map(key => CATEGORY_LABELS[key as keyof typeof CATEGORY_LABELS]);
     const categoryCounts = Object.values(data);
