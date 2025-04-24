@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { NAV_ITEMS } from '@/lib/constants';
 import { useAuth } from '@/hooks/use-auth';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { 
   LayoutDashboard, 
   ListTodo, 
@@ -15,6 +17,7 @@ import {
 
 const Sidebar = () => {
   const { logout } = useAuth();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
     <aside className="w-64 bg-white shadow-md flex flex-col h-screen fixed left-0">
@@ -50,6 +53,21 @@ const Sidebar = () => {
             <i className="fas fa-sign-out-alt mr-2"></i>
             Logout
           </Button>
+          <div className="flex items-center justify-between mt-4 p-2 rounded-md bg-sidebar-accent/50">
+            <div className="flex items-center gap-3">
+              <Avatar>
+                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarFallback>JD</AvatarFallback>
+              </Avatar>
+              <div className={cn(
+                "transition-opacity",
+                isMobileMenuOpen ? "opacity-100" : "opacity-0 md:opacity-100"
+              )}>
+                <p className="text-sm font-medium text-sidebar-foreground">John Doe</p>
+                <p className="text-xs text-sidebar-foreground/70">john@example.com</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </aside>
