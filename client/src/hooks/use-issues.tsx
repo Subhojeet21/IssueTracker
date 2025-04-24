@@ -68,8 +68,7 @@ export function useIssues() {
     }
     
     return true;
-  });
-  
+  });  
   return {
     issues: filteredIssues,
     allIssues: issues,

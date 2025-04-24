@@ -10,6 +10,7 @@ import { useIssues } from '@/hooks/use-issues';
 import { useFilter } from '@/hooks/use-filter';
 import { getStatusOptions, getPriorityOptions, getCategoryOptions, getTeamOptions } from '@/lib/utils';
 import { useAuth } from '@/hooks/use-auth';
+import { Label } from "@/components/ui/label";
 
 const Issues = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -42,89 +43,105 @@ const Issues = () => {
             value={filters.search || ''}
             onChange={(e) => updateFilter('search', e.target.value)}
           />
-          
-          <Select 
-            value={filters.status?.[0] || 'all'} 
-            onValueChange={(value) => updateFilter('status', value === 'all' ? [] : [value])}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Status" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Status</SelectItem>
-              {getStatusOptions().map(status => (
-                <SelectItem key={status.value} value={status.value}>
-                  {status.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-
-          <Select 
-            value={filters.priority?.[0] || 'all'}
-            onValueChange={(value) => updateFilter('priority', value === 'all' ? [] : [value])}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Priority" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Priorities</SelectItem>
-              {getPriorityOptions().map(priority => (
-                <SelectItem key={priority.value} value={priority.value}>
-                  {priority.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-
-          <Select 
-            value={filters.category || 'all'}
-            onValueChange={(value) => updateFilter('category', value === 'all' ? '' : value)}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Category" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Categories</SelectItem>
-              {getCategoryOptions().map(category => (
-                <SelectItem key={category.value} value={category.value}>
-                  {category.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-
-          <Select 
-            value={filters.assignee || 'anyone'}
-            onValueChange={(value) => updateFilter('assignee', value === 'anyone' ? '' : value)}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Assigned To" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="anyone">Anyone</SelectItem>
-              <SelectItem value="me">Me</SelectItem>
-              <SelectItem value="unassigned">Unassigned</SelectItem>
-            </SelectContent>
-          </Select>
         </div>
+
         <div className="grid grid-cols-5 gap-4">
-          <Select 
-            value={filters.team || 'all'}
-            onValueChange={(value) => updateFilter('assignee', value === 'anyone' ? '' : value)}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Team Name" />
-            </SelectTrigger>
-            <SelectContent>
-            <SelectItem value="all">All Teams</SelectItem>
-              {getTeamOptions().map(team => (
-                <SelectItem key={team.value} value={team.value}>
-                  {team.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <div className="space-y-2">
+            <Label htmlFor="status-filter">Status</Label>
+            <Select 
+              value={filters.status?.[0] || 'all'} 
+              onValueChange={(value) => updateFilter('status', value === 'all' ? [] : [value])}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Status</SelectItem>
+                {getStatusOptions().map(status => (
+                  <SelectItem key={status.value} value={status.value}>
+                    {status.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          
+          <div className="space-y-2">
+            <Label htmlFor="status-filter">Priority</Label>
+            <Select 
+              value={filters.priority?.[0] || 'all'}
+              onValueChange={(value) => updateFilter('priority', value === 'all' ? [] : [value])}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Priority" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Priorities</SelectItem>
+                {getPriorityOptions().map(priority => (
+                  <SelectItem key={priority.value} value={priority.value}>
+                    {priority.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="status-filter">Category</Label>
+            <Select 
+              value={filters.category || 'all'}
+              onValueChange={(value) => updateFilter('category', value === 'all' ? '' : value)}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Category" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Categories</SelectItem>
+                {getCategoryOptions().map(category => (
+                  <SelectItem key={category.value} value={category.value}>
+                    {category.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="status-filter">Assigned To</Label>
+            <Select 
+              value={filters.assignee || 'anyone'}
+              onValueChange={(value) => updateFilter('assignee', value === 'anyone' ? '' : value)}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Assigned To" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="anyone">Anyone</SelectItem>
+                <SelectItem value="me">Me</SelectItem>
+                <SelectItem value="unassigned">Unassigned</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+          <Label htmlFor="status-filter">Team Name</Label>
+            <Select 
+              value={filters.team || 'all'}
+              onValueChange={(value) => updateFilter('team', value === 'all' ? '' : value)}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Team Name" />
+              </SelectTrigger>
+              <SelectContent>
+              <SelectItem value="all">All Teams</SelectItem>
+                {getTeamOptions().map(team => (
+                  <SelectItem key={team.value} value={team.value}>
+                    {team.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </div>
       </div>
       
