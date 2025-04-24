@@ -202,7 +202,7 @@ const IssueForm = ({ open, onClose }: IssueFormProps) => {
                   <FormItem>
                     <FormLabel>Team Name</FormLabel>
                     <Select
-                      onValueChange={(value) => field.onChange(value === "unassigned" ? undefined : parseInt(value))}
+                      onValueChange={(value) => field.onChange(value === "unassigned" ? undefined : value)}
                       value={field.value?.toString() || "unassigned"}
                     >
                       <FormControl>
