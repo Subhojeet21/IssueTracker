@@ -8,10 +8,12 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Switch } from '@/components/ui/switch';
 import { Separator } from '@/components/ui/separator';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { toast } from '@/components/ui/use-toast';
+//import { toast } from '@/components/ui/use-toast';
+import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from 'lucide-react';
 
 const Settings = () => {
+  const { toast } = useToast();
   // User profile state
   const [profileForm, setProfileForm] = useState({
     name: 'John Doe',
