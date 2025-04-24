@@ -36,15 +36,14 @@ export function FilterProvider({ children }: { children: ReactNode }) {
   }, []);
   
   const applyFilters = useCallback(() => {
-    const cleanedFilters = Object.entries(pendingFilters).reduce((acc, [key, value]) => {
+    const cleanedFilters = Object.entries(pendingFilters).reduce<Filters>((acc, [key, value]) => {
       if (value !== undefined && 
           !(Array.isArray(value) && value.length === 0) && 
           !(typeof value === 'string' && value.trim() === '')) {
-        acc[key] = value;
+        acc[key as keyof Filters] = value;
       }
       return acc;
-    }, {} as Filters);
-    
+    }, {});    
     setFilters(cleanedFilters);
   }, [pendingFilters]);
   
