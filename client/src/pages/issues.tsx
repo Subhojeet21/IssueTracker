@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 const Issues = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const { issues, isLoading } = useIssues();
-  const { filters, updateFilter } = useFilter();
+  const { filters, updateFilter, applyFilters } = useFilter();
   const { user, logout } = useAuth();
 
   const handleResetFilters = () => {
@@ -73,7 +73,11 @@ const Issues = () => {
             <Label htmlFor="status-filter">Status</Label>
             <Select 
               value={filters.status?.[0] || 'all'} 
-              onValueChange={(value) => updateFilter('status', value === 'all' ? [] : [value])}
+              onValueChange={(value) => {
+                updateFilter('status', value === 'all' ? [] : [value]);
+                applyFilters();
+              }
+            }
             >
               <SelectTrigger>
                 <SelectValue placeholder="Status" />
