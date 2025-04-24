@@ -36,6 +36,7 @@ const Analytics = () => {
       if (filters.assignee) params.append('assignee', filters.assignee);
       if (filters.dateRange?.from) params.append('from', filters.dateRange.from);
       if (filters.dateRange?.to) params.append('to', filters.dateRange.to);
+      if (timeRange) params.append('timeRange', timeRange);
       
       const response = await fetch(`/api/analytics/summary?${params.toString()}`);
       if (!response.ok) throw new Error('Failed to fetch analytics');

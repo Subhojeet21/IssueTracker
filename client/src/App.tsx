@@ -50,12 +50,12 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <FilterProvider>
-          <TooltipProvider>
-            <Toaster />
+        <TooltipProvider>
+          <Toaster />
+          <FilterProvider>
             <Router />
-          </TooltipProvider>
-        </FilterProvider>
+          </FilterProvider>
+        </TooltipProvider>
       </AuthProvider>
     </QueryClientProvider>
   );
