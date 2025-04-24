@@ -2,6 +2,16 @@ import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { NAV_ITEMS } from '@/lib/constants';
 import { useAuth } from '@/hooks/use-auth';
+import { 
+  LayoutDashboard, 
+  ListTodo, 
+  BarChart3, 
+  Settings, 
+  LogOut, 
+  Menu, 
+  X,
+  PlusCircle
+} from 'lucide-react';
 
 const Sidebar = () => {
   const { logout } = useAuth();
@@ -31,6 +41,7 @@ const Sidebar = () => {
         </nav>
 
         <div className="mt-auto">
+          <LogOut size={20} className="mr-3" />
           <Button 
             onClick={logout}
             variant="ghost" 
