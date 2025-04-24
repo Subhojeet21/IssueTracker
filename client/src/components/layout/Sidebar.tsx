@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { NAV_ITEMS } from '@/lib/constants';
 import { useAuth } from '@/hooks/use-auth';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { cn } from '@/lib/utils';
 import { 
   LayoutDashboard, 
   ListTodo, 
