@@ -23,6 +23,14 @@
 --destructive-foreground: 60 9.1% 97.8%;
 --ring: 20 14.3% 4.1%;
 --radius: 0.5rem;
+--sidebar-background: 222 47% 11%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 210 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 217 33% 17%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217 33% 17%;
+    --sidebar-ring: 224 76% 48%;
   }
   .dark {
       --background: 240 10% 3.9%;
