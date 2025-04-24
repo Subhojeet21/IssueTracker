@@ -145,12 +145,12 @@ const Header = ({ toggleSidebar }: HeaderProps) => {
               
               {userMenuOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50 overflow-hidden">
-                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  {/*<a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     <i className="fas fa-user mr-2"></i> Profile
                   </a>
                   <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     <i className="fas fa-cog mr-2"></i> Settings
-                  </a>
+                  </a>*/}
                   <div className="border-t border-gray-100"></div>
                   <button 
                     onClick={handleLogout}
