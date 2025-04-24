@@ -8,6 +8,7 @@ import Dashboard from "@/pages/dashboard";
 import Issues from "@/pages/issues";
 import IssueDetail from "@/pages/issue-detail";
 import Analytics from "@/pages/analytics";
+import Settings from "@/pages/Settings";
 import Login from "@/pages/login";
 import Register from "@/pages/register";
 import { AuthProvider } from "@/hooks/use-auth";
@@ -34,6 +35,11 @@ function Router() {
       <Route path="/analytics">
         <AppLayout>
           <Analytics />
+        </AppLayout>
+      </Route>
+      <Route path="/settings">
+        <AppLayout>
+          <Settings />
         </AppLayout>
       </Route>
       <Route path="/">
