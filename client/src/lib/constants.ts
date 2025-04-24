@@ -35,11 +35,11 @@ export const NAV_ITEMS = [
     label: 'Analytics', 
     icon: 'chart-bar' 
   },
-  { 
+  /*{ 
     path: '/teams', 
     label: 'Teams', 
     icon: 'users' 
-  },
+  },*/
   { 
     path: '/settings', 
     label: 'Settings', 
