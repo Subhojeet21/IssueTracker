@@ -19,9 +19,12 @@ const Issues = () => {
   const { user, logout } = useAuth();
 
   const handleResetFilters = () => {
-    Object.keys(filters).forEach(key => {
-      updateFilter(key as keyof typeof filters, '');
-    });  
+      updateFilter('search', '');
+      updateFilter('status', []);
+      updateFilter('priority', []);
+      updateFilter('category', []);
+      updateFilter('assignee', []);
+      updateFilter('team', []); 
   };
 
   if (!user) return null;
