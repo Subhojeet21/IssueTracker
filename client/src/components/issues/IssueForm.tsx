@@ -39,7 +39,7 @@ const IssueForm = ({ open, onClose }: IssueFormProps) => {
       status: "open",
       priority: "medium",
       category: "bug",
-      team: undefined,
+      team: "compass",
       assigneeId: undefined,
       reporterId: user?.id,
     },
