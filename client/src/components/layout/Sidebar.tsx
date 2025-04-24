@@ -3,7 +3,8 @@ import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { NAV_ITEMS } from '@/lib/constants';
 import { useAuth } from '@/hooks/use-auth';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+//import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import Avatar from 'react-avatar';
 import { cn } from '@/lib/utils';
 import { 
   LayoutDashboard, 
@@ -44,7 +45,7 @@ const NavItem = ({ to, icon: Icon, label, isActive, isMobileMenuOpen, onClick }:
 );
 
 const Sidebar = () => {
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const isActive = (path: string) => {
     return location.pathname === path;
@@ -55,6 +56,8 @@ const Sidebar = () => {
       setIsMobileMenuOpen(false);
     }
   };
+
+  if (!user) return null;
 
   return (
     <aside className="w-64 bg-[hsl(222,47%,11%)] shadow-md flex flex-col h-screen fixed left-0">
@@ -126,16 +129,21 @@ const Sidebar = () => {
           </Button>
           <div className="flex items-center justify-between mt-4 p-2 rounded-md bg-sidebar-accent/50">
             <div className="flex items-center gap-3">
-              <Avatar>
+              {/*<Avatar>
                 <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>JD</AvatarFallback>
-              </Avatar>
+                <AvatarFallback>{user.fullName}</AvatarFallback>
+              </Avatar>*/}
+              {user && (
+                <Link to="/profile">
+                  <Avatar name={user.fullName} size="40" round={true} />
+                </Link>
+              )}
               <div className={cn(
                 "transition-opacity",
                 isMobileMenuOpen ? "opacity-100" : "opacity-0 md:opacity-100"
               )}>
-                <p className="text-sm font-medium text-sidebar-foreground">John Doe</p>
-                <p className="text-xs text-sidebar-foreground/70">john@example.com</p>
+                <p className="text-sm font-medium text-sidebar-foreground">{user.fullName}</p>
+                <p className="text-xs text-sidebar-foreground/70">{user.email}</p>
               </div>
             </div>
           </div>
