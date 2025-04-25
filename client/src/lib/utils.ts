@@ -115,7 +115,7 @@ export function getTeamOptions() {
 
 export function getEnvironmentOptions() {
   return ENVIRONMENT_VALUES.map(environment => ({
-    label: environment.toUpperCase() + environment.slice(1),
+    label: environment.toUpperCase(),
     value: environment
   }));
 }

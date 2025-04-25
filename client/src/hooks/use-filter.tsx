@@ -6,6 +6,7 @@ export interface Filters {
   priority?: string[];
   category?: string;
   team?: string;
+  environment?: string;
   assignee?: string;
   dateRange?: {
     from: string;
