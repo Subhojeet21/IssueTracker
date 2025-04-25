@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Issue } from '@shared/schema';
+import { useAuth } from './use-auth';
 import { useFilter } from './use-filter';
 
 export function useIssues() {
   const { filters } = useFilter();
+  const { user } = useAuth();
   
   const { data: issues = [], isLoading, isError } = useQuery<Issue[]>({
     queryKey: ['/api/issues'],
@@ -43,7 +45,7 @@ export function useIssues() {
     
     // Assignee filter
     if (filters.assignee) {
-      if (filters.assignee === 'me' && issue.assigneeId !== issue.assigneeId) { // Assuming current user is John Doe with ID 1
+      if (filters.assignee === 'me' && user && issue.assigneeId !== user.id) { 
         return false;
       } else if (filters.assignee === 'unassigned' && issue.assigneeId) {
         return false;
