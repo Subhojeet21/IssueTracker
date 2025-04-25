@@ -18,9 +18,8 @@ import AppLayout from "@/components/layout/AppLayout";
 
 // Protected Route component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const [location, ] = useLocation();
+  const [location, navigate ] = useLocation();
   const { user, isLoading } = useAuth();
-  const [, navigate] = useLocation();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -30,9 +29,13 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   // If user is not null, it means user has logged in.
   // Check if the user is authenticated, if so, then wait for the isLoading to be false.
   // If isLoading is false and user is not null, then redirect to dashboard.
-  if (!user && location !== "/login" && location !== "/register") {
+  if(user && !isLoading) {
+    if (location === "/login" || location === "/register") {
       navigate("/");
-  } 
+    } 
+  }
+
+  // If user is null, it means user is not authenticated.
   if (!user) {
     return <Redirect to="/login" />;
   }
