@@ -287,6 +287,7 @@ export const ResolutionTimeChart = ({ issues }: ResolutionTimeChartProps) => {
   }, [issues]);
 
   useEffect(() => {
+    console.log(aggregatedData);
 
     if (!chartRef.current) return;
 
