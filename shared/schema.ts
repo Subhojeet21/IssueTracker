@@ -7,6 +7,7 @@ export const priorityEnum = pgEnum('priority', ['high', 'medium', 'low']);
 export const statusEnum = pgEnum('status', ['open', 'in_progress', 'resolved', 'closed']);
 export const categoryEnum = pgEnum('category', ['bug', 'feature', 'documentation', 'security', 'performance']);
 export const teamEnum = pgEnum('team', ['compass', 'meta', 'everest']);
+export const environmentEnum = pgEnum('environment', ['dev', 'int', 'stg', 'prod']);
 
 // Users table
 export const users = pgTable("users", {
@@ -28,6 +29,7 @@ export const issues = pgTable("issues", {
   priority: priorityEnum("priority").notNull(),
   category: categoryEnum("category").notNull(),
   team: teamEnum("team").notNull(),
+  environment: environmentEnum("environment").notNull(),
   assigneeId: integer("assignee_id").references(() => users.id),
   reporterId: integer("reporter_id").references(() => users.id).notNull(),
   createdAt: timestamp("created_at").defaultNow(),
@@ -113,8 +115,10 @@ export const PRIORITY_VALUES = ['high', 'medium', 'low'] as const;
 export const STATUS_VALUES = ['open', 'in_progress', 'resolved', 'closed'] as const;
 export const CATEGORY_VALUES = ['bug', 'feature', 'documentation', 'security', 'performance'] as const;
 export const TEAM_VALUES = ['compass', 'meta', 'everest'] as const;
+export const ENVIRONMENT_VALUES = ['dev', 'int', 'stg', 'prod'] as const;
 
 export type Priority = (typeof PRIORITY_VALUES)[number];
 export type Status = (typeof STATUS_VALUES)[number];
 export type Category = (typeof CATEGORY_VALUES)[number];
 export type Team = (typeof TEAM_VALUES)[number];
+export type Environment = (typeof ENVIRONMENT_VALUES)[number];

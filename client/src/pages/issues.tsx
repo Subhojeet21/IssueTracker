@@ -8,7 +8,7 @@ import IssueTable from '@/components/issues/IssueTable';
 import IssueForm from '@/components/issues/IssueForm';
 import { useIssues } from '@/hooks/use-issues';
 import { useFilter } from '@/hooks/use-filter';
-import { getStatusOptions, getPriorityOptions, getCategoryOptions, getTeamOptions } from '@/lib/utils';
+import { getStatusOptions, getPriorityOptions, getCategoryOptions, getTeamOptions, getEnvironmentOptions } from '@/lib/utils';
 import { useAuth } from '@/hooks/use-auth';
 import { Label } from "@/components/ui/label";
 import { PlusCircle } from 'lucide-react';
@@ -185,6 +185,29 @@ const Issues = () => {
                 {getTeamOptions().map(team => (
                   <SelectItem key={team.value} value={team.value}>
                     {team.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+          <Label htmlFor="status-filter">Environment</Label>
+            <Select 
+              value={filters.environment || 'all'}
+              onValueChange={(value) => {
+                updateFilter('environment', value === 'all' ? '' : value);
+              }
+            }
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Environment Name" />
+              </SelectTrigger>
+              <SelectContent>
+              <SelectItem value="all">All Envs</SelectItem>
+                {getEnvironmentOptions().map(environment => (
+                  <SelectItem key={environment.value} value={environment.value}>
+                    {environment.label}
                   </SelectItem>
                 ))}
               </SelectContent>

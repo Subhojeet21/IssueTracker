@@ -40,6 +40,7 @@ const IssueForm = ({ open, onClose }: IssueFormProps) => {
       priority: "medium",
       category: "bug",
       team: "compass",
+      environment: "dev",
       assigneeId: undefined,
       reporterId: user?.id,
     },
@@ -198,7 +199,7 @@ const IssueForm = ({ open, onClose }: IssueFormProps) => {
             </div>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <FormField
+              <FormField
                 control={form.control}
                 name="team"
                 render={({ field }) => (
@@ -244,6 +245,35 @@ const IssueForm = ({ open, onClose }: IssueFormProps) => {
                         <SelectItem value="2">Tariq</SelectItem>
                         <SelectItem value="3">Anjireddy</SelectItem>
                         <SelectItem value="4">Manohar</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <FormField
+                control={form.control}
+                name="environment"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Environment</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select environment" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="dev">DEV</SelectItem>
+                        <SelectItem value="int">INT</SelectItem>
+                        <SelectItem value="stg">STG</SelectItem>
+                        <SelectItem value="prod">PROD</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />

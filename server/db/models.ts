@@ -41,6 +41,11 @@ const issueSchema = new Schema({
     enum: ['compass', 'meta', 'everest'],
     default: 'compass'
   },
+  environment: {
+    type: String,
+    enum: ['dev', 'int', 'stg', 'prod'],
+    default: 'dev'
+  },
   assigneeId: { type: Number, default: null },
   reporterId: { type: Number, required: true },
   createdAt: { type: Date, default: Date.now },

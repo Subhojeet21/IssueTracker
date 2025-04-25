@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { STATUS_VALUES, PRIORITY_VALUES, CATEGORY_VALUES, TEAM_VALUES } from "@shared/schema";
+import { STATUS_VALUES, PRIORITY_VALUES, CATEGORY_VALUES, TEAM_VALUES, ENVIRONMENT_VALUES } from "@shared/schema";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -110,6 +110,13 @@ export function getTeamOptions() {
   return TEAM_VALUES.map(team => ({
     label: team.charAt(0).toUpperCase() + team.slice(1),
     value: team
+  }));
+}
+
+export function getEnvironmentOptions() {
+  return ENVIRONMENT_VALUES.map(environment => ({
+    label: environment.toUpperCase() + environment.slice(1),
+    value: environment
   }));
 }
 

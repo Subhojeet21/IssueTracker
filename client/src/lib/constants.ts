@@ -25,6 +25,13 @@ export const TEAM_LABELS = {
   everest: 'Everest'
 };
 
+export const ENVIRONMENT_LABELS = {
+  dev: 'DEV',
+  int: 'INT',
+  stg: 'STG',
+  prod: 'PROD'
+};
+
 export const NAV_ITEMS = [
   { 
     path: '/', 
