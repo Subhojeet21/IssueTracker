@@ -11,6 +11,7 @@ import { useFilter } from '@/hooks/use-filter';
 import { getStatusOptions, getPriorityOptions, getCategoryOptions, getTeamOptions } from '@/lib/utils';
 import { useAuth } from '@/hooks/use-auth';
 import { Label } from "@/components/ui/label";
+import { PlusCircle } from 'lucide-react';
 
 const Issues = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -44,7 +45,8 @@ const Issues = () => {
             className="bg-primary hover:bg-primary-dark"
             onClick={() => setIsFormOpen(true)}
           >
-            <i className="fas fa-plus mr-2"></i>
+            {/*<i className="fas fa-plus mr-2"></i>*/}
+            <PlusCircle className="mr-2 h-4 w-4" />
             Create Issue
           </Button>
         </div>
