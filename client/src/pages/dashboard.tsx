@@ -7,6 +7,8 @@ import IssueForm from '@/components/issues/IssueForm';
 import { ArrowRightIcon } from 'lucide-react';
 import { Link } from 'wouter';
 import { useAuth } from '@/hooks/use-auth';
+import { useIssues } from '@/hooks/use-issues';
+import IssueTable from '@/components/issues/IssueTable';
 
 interface DashboardData {
   totalIssues: number;
@@ -18,6 +20,7 @@ interface DashboardData {
 const Dashboard = () => {
   const { user, logout } = useAuth();
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const { issues } = useIssues();
 
   const { data, isLoading, isError } = useQuery<DashboardData>({
     queryKey: ['/api/analytics/summary'],
@@ -29,6 +32,11 @@ const Dashboard = () => {
       return response.json();
     }
   });
+
+  // Filter recent issues (last 5)
+  const recentIssues = [...issues].sort((a, b) =>
+    new Date(b.createdAt || '').getTime() - new Date(a.createdAt || '').getTime()
+  ).slice(0, 5);
 
   if (!user) return null;
 
@@ -107,9 +115,15 @@ const Dashboard = () => {
             </Button>
           </Link>
         </div>
-        {data.totalIssues === 0 ? (
+        
+        {recentIssues.length === 0 ? (
+          <div className="text-center py-8 text-gray-500">No recent issues</div>
+        ) : (
+          <IssueTable issues={recentIssues} isLoading={isLoading} />
+        )}
+        {/*{data.totalIssues === 0 ? (
           <div className="text-center py-8 text-gray-500">No issues found</div>
-        ) : null}
+        ) : null}*/}
       </Card>
 
       <IssueForm open={isFormOpen} onClose={() => setIsFormOpen(false)} />
