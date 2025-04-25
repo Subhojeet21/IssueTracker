@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -28,6 +28,10 @@ const Issues = () => {
       updateFilter('team', ''); 
       applyFilters();
   };
+
+  useEffect(() => {
+    applyFilters();
+  }, [filters, applyFilters]);
 
   if (!user) return null;
 
@@ -81,7 +85,6 @@ const Issues = () => {
               value={filters.status?.[0] || 'all'} 
               onValueChange={(value) => {
                 updateFilter('status', value === 'all' ? [] : [value]);
-                applyFilters();
               }
             }
             >
@@ -105,7 +108,6 @@ const Issues = () => {
               value={filters.priority?.[0] || 'all'}
               onValueChange={(value) => {
                 updateFilter('priority', value === 'all' ? [] : [value]);
-                applyFilters();
               }
             }
             >
@@ -129,7 +131,6 @@ const Issues = () => {
               value={filters.category || 'all'}
               onValueChange={(value) => {
                 updateFilter('category', value === 'all' ? '' : value);
-                applyFilters();
               }
             }
             >
@@ -153,7 +154,6 @@ const Issues = () => {
               value={filters.assignee || 'all'}
               onValueChange={(value) => {
                 updateFilter('assignee', value === 'all' ? '' : value);
-                applyFilters();
               }
             }
             >
@@ -174,7 +174,6 @@ const Issues = () => {
               value={filters.team || 'all'}
               onValueChange={(value) => {
                 updateFilter('team', value === 'all' ? '' : value);
-                applyFilters();
               }
             }
             >
