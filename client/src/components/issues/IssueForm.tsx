@@ -59,7 +59,7 @@ const IssueForm = ({ open, onClose }: IssueFormProps) => {
         formData.append("file", attachments[0]);
         formData.append("uploaderId", user?.id.toString() || "1");
         formData.append("issueId", issue?.id.toString());
-        formData.append("path","/uploads/"+fileName);
+        formData.append("filepath","/uploads/"+fileName);
 
         await fetch(`/api/issues/${issue.id}/attachments`, {
           method: "POST",
