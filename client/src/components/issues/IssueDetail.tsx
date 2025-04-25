@@ -172,8 +172,8 @@ const IssueDetail = ({
                         Uploaded by {userNames[attachment.uploaderId] || 'Unknown'}
                       </p>
                     </div>
-                    <Button variant="ghost" size="sm" onClick={() => {
-                        window.open(attachment.filepath, '_blank');
+                    <Button variant="ghost" size="sm" onClick={() => {                        
+                        window.open(`/api/download/${attachment.id}`, '_blank');
                       }}>
                       <i className="fas fa-download mr-1"></i>
                       Download

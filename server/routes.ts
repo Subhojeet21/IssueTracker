@@ -396,6 +396,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
+  app.get('/api/download/:fileId', async (req: Request, res: Response) => {
+    try {
+      const fileId = parseInt(req.params.fileId);
+  
+      if (isNaN(fileId)) {
+        return res.status(400).json({ message: 'Invalid file ID' });
+      }
+  
+      const attachment = await storage.getAttachmentsByIssue(fileId);
+      const file = attachment.find((a) => a.id === fileId)
+  
+      if (!file) {
+        return res.status(404).json({ message: 'Attachment not found' });
+      }
+  
+      const filePath = file.filepath;
+      console.log('filePath: ', filePath)
+  
+      res.download(filePath);
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(400).json({ message: error.message });
+      }
+      return res.status(500).json({ message: 'An unknown error occurred' });
+    }
+  });
+
   // Notifications
   app.get('/api/notifications', async (req: Request, res: Response) => {
     try {

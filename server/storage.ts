@@ -173,11 +173,12 @@ export class MemStorage implements IStorage {
   async createAttachment(insertAttachment: InsertAttachment): Promise<Attachment> {
     const id = this.attachmentCurrentId++;
     const now = new Date();
-    
+        
     const attachment: Attachment = {
       ...insertAttachment,
       id,
-      createdAt: now
+      createdAt: now,
+      filepath: `uploads/file${id}`
     };
     
     this.attachments.set(id, attachment);
@@ -507,11 +508,12 @@ export class MongoStorage implements IStorage {
   async createAttachment(insertAttachment: InsertAttachment): Promise<Attachment> {
     const id = await getNextSequence('attachments');
     const now = new Date();
-    
+        
     const attachment = await AttachmentModel.create({
       ...insertAttachment,
       id,
-      createdAt: now
+      createdAt: now,
+      path: `uploads/file${id}`
     });
     
     return attachment.toObject();
