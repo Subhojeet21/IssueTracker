@@ -43,7 +43,7 @@ export function useIssues() {
     
     // Assignee filter
     if (filters.assignee) {
-      if (filters.assignee === 'me' && issue.assigneeId !== 1) { // Assuming current user is John Doe with ID 1
+      if (filters.assignee === 'me' && issue.assigneeId !== issue.assigneeId) { // Assuming current user is John Doe with ID 1
         return false;
       } else if (filters.assignee === 'unassigned' && issue.assigneeId) {
         return false;
