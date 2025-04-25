@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/use-auth';
 import { Link, useLocation } from 'wouter';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,7 +8,7 @@ import { useToast } from '@/hooks/use-toast';
 
 const Login = () => {
   const [location, navigate] = useLocation();
-  const { login, isLoading } = useAuth();
+  const { login, isLoading, user } = useAuth();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   
@@ -16,7 +16,13 @@ const Login = () => {
     try {
       setIsSubmitting(true);
       await login(data.username, data.password);
-      navigate('/');
+      // Redirect if user is already logged in
+      useEffect(() => {
+        if (user) {
+          navigate('/');
+        }
+      }, [user, navigate]);
+      //navigate('/');
     } catch (error) {
       toast({
         title: 'Login failed',
