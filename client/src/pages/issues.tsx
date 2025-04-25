@@ -75,7 +75,7 @@ const Issues = () => {
                   <SelectValue placeholder="Environment Name" />
                 </SelectTrigger>
                 <SelectContent>
-                <SelectItem value="all">All Envs</SelectItem>
+                <SelectItem value="all">All Environments</SelectItem>
                   {getEnvironmentOptions().map(environment => (
                     <SelectItem key={environment.value} value={environment.value}>
                       {environment.label}
