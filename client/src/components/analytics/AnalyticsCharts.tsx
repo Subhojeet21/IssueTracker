@@ -261,8 +261,8 @@ export const ResolutionTimeChart = ({ issues }: ResolutionTimeChartProps) => {
     issues.forEach((issue) => {
       categories.add(issue.category);
 
-      if (issue.resolvedAt) {
-        const resolvedDate = new Date(issue.resolvedAt);
+      if (issue.updatedAt && (issue.status === 'closed' || issue.status === 'resolved')) {
+        const resolvedDate = new Date(issue.updatedAt);
         const createdDate = new Date(issue.createdAt);
         const resolutionTime =
           (resolvedDate.getTime() - createdDate.getTime()) / (1000 * 60 * 60 * 24); // Time in days
