@@ -32,11 +32,11 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1 text-center">
-          <div className="flex justify-center mb-2">
+          {/*<div className="flex justify-center mb-2">
             <div className="bg-primary text-white p-2 rounded-full">
               <i className="fas fa-bug text-xl"></i>
             </div>
-          </div>
+          </div>*/}
           <CardTitle className="text-2xl font-bold">Issue Tracker</CardTitle>
           <CardDescription>Enter your credentials to sign in to your account</CardDescription>
         </CardHeader>
