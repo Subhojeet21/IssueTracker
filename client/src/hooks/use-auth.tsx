@@ -3,6 +3,7 @@ import { useQuery, useMutation } from '@tanstack/react-query';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest, queryClient } from '@/lib/queryClient';
 import { User, InsertUser } from '@shared/schema';
+import { Link, useLocation } from 'wouter';
 
 interface AuthContextType {
   user: User | null;
@@ -17,6 +18,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const { toast } = useToast();
+  const [location, navigate] = useLocation();
   
   const {
     data: user,
@@ -56,6 +58,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     },
     onSuccess: (userData) => {
       queryClient.setQueryData(['/api/auth/user'], userData);
+      navigate('/');
       toast({
         title: 'Login successful',
         description: `Welcome back, ${userData.fullName || userData.username}!`,
