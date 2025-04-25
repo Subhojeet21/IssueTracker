@@ -28,6 +28,7 @@ export interface IStorage {
   
   // Attachment methods
   createAttachment(attachment: InsertAttachment): Promise<Attachment>;
+  getAttachment(id: number): Promise<Attachment | undefined>;
   getAttachmentsByIssue(issueId: number): Promise<Attachment[]>;
   
   // Notification methods
@@ -183,6 +184,10 @@ export class MemStorage implements IStorage {
     
     this.attachments.set(id, attachment);
     return attachment;
+  }
+
+  async getAttachment(id: number): Promise<Attachment | undefined> {
+    return this.attachments.get(id)
   }
 
   async getAttachmentsByIssue(issueId: number): Promise<Attachment[]> {
@@ -517,6 +522,11 @@ export class MongoStorage implements IStorage {
     });
     
     return attachment.toObject();
+  }
+
+  async getAttachment(id: number): Promise<Attachment | undefined> {
+    const attachment = await AttachmentModel.findOne({ id });
+    return attachment ? attachment.toObject() : undefined;
   }
 
   async getAttachmentsByIssue(issueId: number): Promise<Attachment[]> {

@@ -404,14 +404,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: 'Invalid file ID' });
       }
   
-      const attachment = await storage.getAttachmentsByIssue(fileId);
-      const file = attachment.find((a) => a.id === fileId)
+      const attachment = await storage.getAttachment(fileId);
   
-      if (!file) {
+      if (!attachment) {
         return res.status(404).json({ message: 'Attachment not found' });
       }
-  
-      const filePath = file.filepath;
+      const filePath = attachment.filepath;
       console.log('filePath: ', filePath)
   
       res.download(filePath);
