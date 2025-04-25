@@ -232,7 +232,7 @@ const Analytics = () => {
         </TabsContent>
         
         <TabsContent value="performance" className="grid grid-cols-1 gap-6">
-          <ResolutionTimeChart />
+          <ResolutionTimeChart issues={issues} />
         </TabsContent>
       </Tabs>
     </div>

@@ -242,20 +242,67 @@ export const TrendChart = ({ issues, isLoading, isError }: TrendChartProps) => {
   );
   };
   
-export const ResolutionTimeChart = () => {
+interface ResolutionTimeChartProps {
+  issues: Issue[];
+}
+
+export const ResolutionTimeChart = ({ issues }: ResolutionTimeChartProps) => {
   const chartRef = useRef<HTMLCanvasElement>(null);
   const chartInstance = useRef<Chart | null>(null);
-  
-  useEffect(() => {
-    if (!chartRef.current) return;
-    
-    // Mock data - in a real app, this would come from the API
-    const labels = ['Bug', 'Feature', 'Documentation', 'Security', 'Performance'];
-    const data = [3.2, 5.8, 1.9, 4.5, 2.7];
-    
-    if (chartInstance.current) {
-      chartInstance.current.destroy();
+
+  const aggregatedData = useMemo(() => {
+    if (!issues || issues.length === 0) {
+      return [];
     }
+
+    const categoryData: Record<string, { totalTime: number; count: number }> = {};
+    const categories = new Set<string>();
+
+    issues.forEach((issue) => {
+      categories.add(issue.category);
+
+      if (issue.resolvedAt) {
+        const resolvedDate = new Date(issue.resolvedAt);
+        const createdDate = new Date(issue.createdAt);
+        const resolutionTime =
+          (resolvedDate.getTime() - createdDate.getTime()) / (1000 * 60 * 60 * 24); // Time in days
+
+        if (!categoryData[issue.category]) {
+          categoryData[issue.category] = { totalTime: 0, count: 0 };
+        }
+        categoryData[issue.category].totalTime += resolutionTime;
+        categoryData[issue.category].count++;
+      }
+    });
+
+    const formattedData = Object.entries(categoryData).map(([category, data]) => {
+      const avgTime = data.count > 0 ? data.totalTime / data.count : 0;
+      return {
+        category,
+        avgResolutionTime: avgTime.toFixed(1),
+      };
+    });
+
+    return formattedData;
+  }, [issues]);
+
+  useEffect(() => {
+
+    if (!chartRef.current) return;
+
+    if (chartInstance.current) chartInstance.current.destroy();
+    
+    const labels = aggregatedData.map(item => item.category);
+    const data = aggregatedData.map(item => item.avgResolutionTime);
+    
+    const categoryColors = [
+      'rgba(255, 99, 132, 0.7)',   // red
+      'rgba(54, 162, 235, 0.7)',  // blue
+      'rgba(255, 206, 86, 0.7)',  // yellow
+      'rgba(75, 192, 192, 0.7)',  // green
+      'rgba(153, 102, 255, 0.7)', // purple
+      'rgba(255, 159, 64, 0.7)'   // orange
+    ];
     
     chartInstance.current = new Chart(chartRef.current, {
       type: 'bar',
@@ -263,15 +310,9 @@ export const ResolutionTimeChart = () => {
         labels,
         datasets: [
           {
-            label: 'Average Resolution Time (days)',
+            label: "Average Resolution Time (days)",
             data,
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.7)',
-              'rgba(54, 162, 235, 0.7)',
-              'rgba(255, 206, 86, 0.7)',
-              'rgba(75, 192, 192, 0.7)',
-              'rgba(153, 102, 255, 0.7)',
-            ],
+            backgroundColor: categoryColors,
             borderColor: [
               'rgba(255, 99, 132, 1)',
               'rgba(54, 162, 235, 1)',
@@ -315,7 +356,7 @@ export const ResolutionTimeChart = () => {
         chartInstance.current.destroy();
       }
     };
-  }, []);
+  }, [aggregatedData]);
   
   return (
     <Card>
@@ -325,9 +366,6 @@ export const ResolutionTimeChart = () => {
       <CardContent>
         <div className="h-[400px]">
           <canvas ref={chartRef}></canvas>
-        </div>
-        <div className="text-center mt-4 text-sm text-gray-500">
-          <p>Note: This is sample data, which would be replaced with real resolution time data in production.</p>
         </div>
       </CardContent>
     </Card>
