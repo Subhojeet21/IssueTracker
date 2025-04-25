@@ -26,6 +26,7 @@ const Issues = () => {
       updateFilter('category', '');
       updateFilter('assignee', '');
       updateFilter('team', ''); 
+      updateFilter('environment', '');
       applyFilters();
   };
 
@@ -35,7 +36,7 @@ const Issues = () => {
 
   if (!user) return null;
 
-  const hasActiveFilters = filters.search || filters.status || filters.priority || filters.category || filters.assignee || filters.team;
+  const hasActiveFilters = filters.search || filters.status || filters.priority || filters.category || filters.assignee || filters.team || filters.environment;
   
   return (
     <div>
