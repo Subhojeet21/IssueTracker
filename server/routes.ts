@@ -92,7 +92,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     // In a real app, we would check authentication first
     // For demo, return a mock authenticated user
     try {
-      const user = await storage.getUser(1); // John Doe for demo
+      const user = await storage.getUser(-1); // John Doe for demo
       
       if (!user) {
         return res.status(404).json({ message: 'User not found' });

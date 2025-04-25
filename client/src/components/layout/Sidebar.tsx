@@ -134,7 +134,7 @@ const Sidebar = () => {
                 <AvatarFallback>{user.fullName}</AvatarFallback>
               </Avatar>*/}
               {user && (
-                <Link to="/profile">
+                <Link to="/settings">
                   <Avatar name={user.fullName} size="40" round={true} />
                 </Link>
               )}
