@@ -63,7 +63,7 @@ const Issues = () => {
             onChange={(e) => updateFilter('search', e.target.value)}
           />
           <div className="space-y-2">
-            <Label htmlFor="status-filter">Environment</Label>
+            {/*<Label htmlFor="status-filter">Environment</Label>*/}
               <Select 
                 value={filters.environment || 'all'}
                 onValueChange={(value) => {
