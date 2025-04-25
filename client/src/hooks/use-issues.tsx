@@ -33,6 +33,13 @@ export function useIssues() {
     ) {
       return false;
     }
+
+    // Environment filter
+    if (
+      filters.environment && filters.environment.length > 0 && !filters.environment.includes(issue.environment)
+    ) {
+      return false;
+    }
     
     // Assignee filter
     if (filters.assignee) {
