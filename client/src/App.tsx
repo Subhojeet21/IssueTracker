@@ -29,6 +29,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   // If user is not null, it means user has logged in.
   // Check if the user is authenticated, if so, then wait for the isLoading to be false.
   // If isLoading is false and user is not null, then redirect to dashboard.
+  console.log(user, isLoading);
   if(user && !isLoading) {
     if (location === "/login" || location === "/register") {
       navigate("/");
