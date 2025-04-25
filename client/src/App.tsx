@@ -1,5 +1,5 @@
 
-import { Switch, Route, Redirect } from "wouter";
+import { Switch, Route, Redirect, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -18,12 +18,21 @@ import AppLayout from "@/components/layout/AppLayout";
 
 // Protected Route component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const [location, ] = useLocation();
   const { user, isLoading } = useAuth();
+  const [, navigate] = useLocation();
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
+  // If user is not null and is not authenticated, it means the user was authenticated and just being redirected.
+  // If user is not null, it means user has logged in.
+  // Check if the user is authenticated, if so, then wait for the isLoading to be false.
+  // If isLoading is false and user is not null, then redirect to dashboard.
+  if (!user && location !== "/login" && location !== "/register") {
+      navigate("/");
+  } 
   if (!user) {
     return <Redirect to="/login" />;
   }
