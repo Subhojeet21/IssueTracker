@@ -513,7 +513,7 @@ export class MongoStorage implements IStorage {
       ...insertAttachment,
       id,
       createdAt: now,
-      path: `uploads/file${id}`
+      filepath: `uploads/file${id}`
     });
     
     return attachment.toObject();
