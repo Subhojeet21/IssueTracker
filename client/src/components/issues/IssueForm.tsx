@@ -54,7 +54,7 @@ const IssueForm = ({ open, onClose }: IssueFormProps) => {
       const issue = await response.json();
 
       // If there are attachments, upload them
-      if (attachments && attachments.length > 0) {
+      /*if (attachments && attachments.length > 0) {
         const formData = new FormData();
         formData.append("file", attachments[0]);
         formData.append("uploaderId", user?.id.toString() || "1");
@@ -66,7 +66,7 @@ const IssueForm = ({ open, onClose }: IssueFormProps) => {
           body: formData,
           credentials: "include",
         });
-      }
+      }*/
 
       return issue;
     },
@@ -252,7 +252,7 @@ const IssueForm = ({ open, onClose }: IssueFormProps) => {
               />
             </div>
 
-            <FormItem>
+            {/*<FormItem>
               <FormLabel>Attachments</FormLabel>
               <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                 <div className="space-y-1 text-center">
@@ -271,7 +271,7 @@ const IssueForm = ({ open, onClose }: IssueFormProps) => {
                   </p>
                 </div>
               </div>
-            </FormItem>
+            </FormItem>*/}
 
             <DialogFooter>
               <Button type="button" variant="outline" onClick={onClose}>
