@@ -18,6 +18,7 @@ export const CATEGORY_LABELS = {
   security: 'Security',
   performance: 'Performance',
   environmentError: 'Environment Error',
+  missingAccess: 'Missing Access',
 };
 
 export const TEAM_LABELS = {
