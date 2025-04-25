@@ -19,6 +19,8 @@ export const CATEGORY_LABELS = {
   performance: 'Performance',
   environmentError: 'Environment Error',
   missingAccess: 'Missing Access',
+  invalidTestData: 'Invalid Test Data',
+  notADefect: 'Not a Defect',
 };
 
 export const TEAM_LABELS = {
