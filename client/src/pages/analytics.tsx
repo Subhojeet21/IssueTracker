@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { Issue } from '@shared/schema';
 import { useFilter } from '@/hooks/use-filter';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -8,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { StatusChart, CategoryChart } from '@/components/dashboard/Charts';
 import { PriorityChart, TrendChart, ResolutionTimeChart } from '@/components/analytics/AnalyticsCharts';
 import { Download } from 'lucide-react';
+import { useAnalytics } from '@/hooks/use-analytics';
 import { useToast } from '@/hooks/use-toast';
 
 interface AnalyticsData {
@@ -26,6 +28,7 @@ const Analytics = () => {
   const [activeTab, setActiveTab] = useState('overview');
   
   const { filters } = useFilter();
+  const { issues, isLoading: isLoadingIssues, isError: isErrorIssues } = useAnalytics();
   const { data, isLoading, isError } = useQuery<AnalyticsData>({
     queryKey: ['/api/analytics/summary', filters],
     queryFn: async () => {
@@ -43,6 +46,7 @@ const Analytics = () => {
       return response.json();
     }
   });
+  
   
   const handleExportCSV = () => {
     if (!data) return;
@@ -224,7 +228,7 @@ const Analytics = () => {
         </TabsContent>
         
         <TabsContent value="trends" className="grid grid-cols-1 gap-6">
-          <TrendChart />
+          <TrendChart issues={issues} isLoading={isLoadingIssues} isError={isErrorIssues} />
         </TabsContent>
         
         <TabsContent value="performance" className="grid grid-cols-1 gap-6">

@@ -1,7 +1,10 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Chart, registerables } from 'chart.js';
 import { PRIORITY_LABELS } from '@/lib/constants';
+import { Issue } from '@shared/schema';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { format } from 'date-fns';
 
 Chart.register(...registerables);
 
@@ -94,26 +97,104 @@ export const PriorityChart = ({ data, timeRange }: PriorityChartProps) => {
   );
 };
 
-export const TrendChart = () => {
-  const chartRef = useRef<HTMLCanvasElement>(null);
-  const chartInstance = useRef<Chart | null>(null);
-  
-  useEffect(() => {
-    if (!chartRef.current) return;
-    
-    // Mock data - in a real app, this would come from the API
-    const labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'];
-    const openData = [5, 8, 10, 14, 12, 9];
-    const resolvedData = [3, 5, 8, 11, 13, 15];
-    
-    if (chartInstance.current) {
-      chartInstance.current.destroy();
+interface TrendChartProps {
+  issues: Issue[];
+  isLoading: boolean;
+  isError: boolean;
+}
+
+export const TrendChart = ({ issues, isLoading, isError }: TrendChartProps) => {
+  const aggregatedData = useMemo(() => {
+    if (!issues || issues.length === 0) {
+      return [];
     }
-    
-    chartInstance.current = new Chart(chartRef.current, {
+
+    const weeklyData: Record<string, { newIssues: number; resolvedIssues: number }> = {};
+    issues.forEach((issue) => {
+      const createdWeek = format(new Date(issue.createdAt), 'yyyy-WW');
+      const resolvedWeek = issue.resolvedAt ? format(new Date(issue.resolvedAt), 'yyyy-WW') : null;
+
+      // New issues
+      if (!weeklyData[createdWeek]) {
+        weeklyData[createdWeek] = { newIssues: 0, resolvedIssues: 0 };
+      }
+      weeklyData[createdWeek].newIssues++;
+
+      // Resolved issues
+      if (resolvedWeek) {
+        if (!weeklyData[resolvedWeek]) {
+          weeklyData[resolvedWeek] = { newIssues: 0, resolvedIssues: 0 };
+        }
+        weeklyData[resolvedWeek].resolvedIssues++;
+      }
+    });
+
+    return Object.entries(weeklyData).map(([week, counts]) => ({
+      week,
+      ...counts,
+    }));
+  }, [issues]);
+  
+    if (isLoading) {
+      return (
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg font-medium">Issue Trends</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div>Loading...</div>
+          </CardContent>
+        </Card>
+      );
+    }
+  
+    if (isError) {
+      return (
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg font-medium">Issue Trends</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div>Error fetching data.</div>
+          </CardContent>
+        </Card>
+      );
+    }
+  
+    if (!aggregatedData || aggregatedData.length === 0) {
+      return (
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg font-medium">Issue Trends</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div>No data available for Issue Trends</div>
+          </CardContent>
+        </Card>
+      );
+    }
+
+  return (
+    <Card>
+      <CardHeader className="pb-2">
+        <CardTitle className="text-lg font-medium">Issue Trends</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <ResponsiveContainer width="100%" height={400}>
+          <LineChart data={aggregatedData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="week" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="newIssues" stroke="#8884d8" activeDot={{ r: 8 }} />
+            <Line type="monotone" dataKey="resolvedIssues" stroke="#82ca9d" />
+          </LineChart>
+        </ResponsiveContainer>
+        {/* <Chart
       type: 'line',
       data: {
-        labels,
+        labels: aggregatedData.map(item => item.week),
         datasets: [
           {
             label: 'New Issues',
@@ -155,32 +236,12 @@ export const TrendChart = () => {
           }
         }
       }
-    });
-    
-    return () => {
-      if (chartInstance.current) {
-        chartInstance.current.destroy();
-      }
-    };
-  }, []);
-  
-  return (
-    <Card>
-      <CardHeader className="pb-2">
-        <CardTitle className="text-lg font-medium">Issue Trends</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="h-[400px]">
-          <canvas ref={chartRef}></canvas>
-        </div>
-        <div className="text-center mt-4 text-sm text-gray-500">
-          <p>Note: This is sample data, which would be replaced with real trend data in production.</p>
-        </div>
+    /> */}
       </CardContent>
     </Card>
   );
-};
-
+  };
+  
 export const ResolutionTimeChart = () => {
   const chartRef = useRef<HTMLCanvasElement>(null);
   const chartInstance = useRef<Chart | null>(null);
