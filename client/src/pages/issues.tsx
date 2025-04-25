@@ -62,6 +62,28 @@ const Issues = () => {
             value={filters.search || ''}
             onChange={(e) => updateFilter('search', e.target.value)}
           />
+          <div className="space-y-2">
+            <Label htmlFor="status-filter">Environment</Label>
+              <Select 
+                value={filters.environment || 'all'}
+                onValueChange={(value) => {
+                  updateFilter('environment', value === 'all' ? '' : value);
+                }
+              }
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Environment Name" />
+                </SelectTrigger>
+                <SelectContent>
+                <SelectItem value="all">All Envs</SelectItem>
+                  {getEnvironmentOptions().map(environment => (
+                    <SelectItem key={environment.value} value={environment.value}>
+                      {environment.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
 
           {hasActiveFilters && (
             <div className="flex justify-end">          
@@ -186,29 +208,6 @@ const Issues = () => {
                 {getTeamOptions().map(team => (
                   <SelectItem key={team.value} value={team.value}>
                     {team.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="space-y-2">
-          <Label htmlFor="status-filter">Environment</Label>
-            <Select 
-              value={filters.environment || 'all'}
-              onValueChange={(value) => {
-                updateFilter('environment', value === 'all' ? '' : value);
-              }
-            }
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Environment Name" />
-              </SelectTrigger>
-              <SelectContent>
-              <SelectItem value="all">All Envs</SelectItem>
-                {getEnvironmentOptions().map(environment => (
-                  <SelectItem key={environment.value} value={environment.value}>
-                    {environment.label}
                   </SelectItem>
                 ))}
               </SelectContent>
