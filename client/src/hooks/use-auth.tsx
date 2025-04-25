@@ -55,6 +55,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       return res.json();
     },
     onSuccess: (userData) => {
+      refetch();
       queryClient.setQueryData(['/api/auth/user'], userData);
       toast({
         title: 'Login successful',
