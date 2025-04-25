@@ -13,6 +13,7 @@ import { queryClient, apiRequest } from "@/lib/queryClient";
 import { insertIssueSchema, InsertIssue } from "@shared/schema";
 import { z } from "zod";
 import { useState } from "react";
+import { getStatusOptions, getPriorityOptions, getCategoryOptions, getTeamOptions, getEnvironmentOptions } from '@/lib/utils';
 
 interface IssueFormProps {
   open: boolean;
@@ -159,11 +160,16 @@ const IssueForm = ({ open, onClose }: IssueFormProps) => {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="bug">Bug</SelectItem>
+                        {/*<SelectItem value="bug">Bug</SelectItem>
                         <SelectItem value="feature">Feature</SelectItem>
                         <SelectItem value="documentation">Documentation</SelectItem>
                         <SelectItem value="security">Security</SelectItem>
-                        <SelectItem value="performance">Performance</SelectItem>
+                        <SelectItem value="performance">Performance</SelectItem>*/}
+                        {getCategoryOptions().map(category => (
+                          <SelectItem key={category.value} value={category.value}>
+                            {category.label}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                     <FormMessage />

@@ -17,6 +17,7 @@ export const CATEGORY_LABELS = {
   documentation: 'Documentation',
   security: 'Security',
   performance: 'Performance',
+  environmentError: 'Environment Error',
 };
 
 export const TEAM_LABELS = {
