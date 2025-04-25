@@ -160,11 +160,6 @@ const IssueForm = ({ open, onClose }: IssueFormProps) => {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {/*<SelectItem value="bug">Bug</SelectItem>
-                        <SelectItem value="feature">Feature</SelectItem>
-                        <SelectItem value="documentation">Documentation</SelectItem>
-                        <SelectItem value="security">Security</SelectItem>
-                        <SelectItem value="performance">Performance</SelectItem>*/}
                         {getCategoryOptions().map(category => (
                           <SelectItem key={category.value} value={category.value}>
                             {category.label}
