@@ -104,13 +104,15 @@ const IssueTable = ({ issues, isLoading = false }: IssueTableProps) => {
                         <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 font-medium text-sm">
                           {issue.assigneeId === 1 ? 'S' : 
                            issue.assigneeId === 2 ? 'T' : 
-                           issue.assigneeId === 3 ? 'A' : 'M'}
+                           issue.assigneeId === 3 ? 'A' : 
+                           issue.assigneeId === 4 ? 'M' : 'TT'}
                         </div>
                         <div className="ml-3">
                           <p className="text-sm text-gray-900 whitespace-nowrap">
                             {issue.assigneeId === 1 ? 'Subhojeet' : 
                              issue.assigneeId === 2 ? 'Tariq' : 
-                             issue.assigneeId === 3 ? 'Anjireddy' : 'Manohar'}
+                             issue.assigneeId === 3 ? 'Anjireddy' : 
+                             issue.assigneeId === 4 ? 'Manohar' : 'Testing Team'}
                           </p>
                         </div>
                       </div>

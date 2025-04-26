@@ -246,6 +246,7 @@ const IssueForm = ({ open, onClose }: IssueFormProps) => {
                         <SelectItem value="2">Tariq</SelectItem>
                         <SelectItem value="3">Anjireddy</SelectItem>
                         <SelectItem value="4">Manohar</SelectItem>
+                        <SelectItem value="5">Testing Team</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />

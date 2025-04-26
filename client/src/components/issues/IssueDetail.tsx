@@ -37,6 +37,7 @@ const IssueDetail = ({
     2: 'Tariq',
     3: 'Anjireddy',
     4: 'Manohar',
+    5: 'Testing Team',
   };
   
   const reporterName = issue.reporterId ? userNames[issue.reporterId] || 'Unknown' : 'Unknown';
@@ -119,6 +120,7 @@ const IssueDetail = ({
                     <SelectItem value="2">Tariq</SelectItem>
                     <SelectItem value="3">Anjireddy</SelectItem>
                     <SelectItem value="4">Manohar</SelectItem>
+                    <SelectItem value="5">Testing Team</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
