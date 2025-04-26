@@ -112,7 +112,7 @@ export const TrendChart = ({ issues, isLoading, isError }: TrendChartProps) => {
     const weeklyData: Record<string, { newIssues: number; resolvedIssues: number }> = {};
     issues.forEach((issue) => {
       const createdWeek = format(new Date(issue.createdAt), "yyyy-'W'ww");
-      const resolvedWeek = issue.updatedAt && (issue.status === 'closed' || issue.status === 'resolved') ? format(new Date(issue.updatedAt), "yyyy-'W'ww") : null;
+      const resolvedWeek = issue.updatedAt && (issue.status === 'closed') ? format(new Date(issue.updatedAt), "yyyy-'W'ww") : null;
 
       // New issues
       if (!weeklyData[createdWeek]) {
@@ -261,7 +261,7 @@ export const ResolutionTimeChart = ({ issues }: ResolutionTimeChartProps) => {
     issues.forEach((issue) => {
       categories.add(issue.category);
 
-      if (issue.updatedAt && (issue.status === 'closed' || issue.status === 'resolved')) {
+      if (issue.updatedAt && (issue.status === 'closed')) {
         const resolvedDate = new Date(issue.updatedAt);
         const createdDate = new Date(issue.createdAt);
         const resolutionTime =
