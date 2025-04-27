@@ -1,4 +1,4 @@
-# Web Application Project
+# Issue-Tracker Project
 
 This project is a web application built using a modern technology stack, including TypeScript, React, Node.js, and Vite. It leverages the component library `shadcn/ui` for its user interface. The project is structured with a clear separation between the front-end (client) and back-end (server), with shared code for common types and utilities.
 
