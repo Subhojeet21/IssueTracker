@@ -63,6 +63,7 @@ const IssueDetail = ({
           </TabsList>
           <TabsContent value="details">
             <div>
+            <div className="grid grid-cols-3 gap-4 mb-4">
               <div>
                 <h3 className="text-sm font-medium text-gray-500">Status</h3>
                 <Select 
@@ -122,6 +123,7 @@ const IssueDetail = ({
                     <SelectItem value="5">Testing Team</SelectItem>
                   </SelectContent>
                 </Select>
+              </div>
               </div>
             </div>
             <div className="mt-4">
