@@ -62,8 +62,8 @@ const IssueDetail = ({
             </TabsTrigger>
           </TabsList>
           <TabsContent className="overflow-x-hidden" value="details">
-            <div className="grid gap-6 grid-cols-1 md:grid-cols-3 mb-6">
-              <div className="space-y-2">
+            <div className="w-full ">
+              <div>
                 <h3 className="text-sm font-medium text-gray-500">Status</h3>
                 <Select 
                   defaultValue={issue.status} 
@@ -83,8 +83,8 @@ const IssueDetail = ({
                 </Select>
               </div>
               
-              <div className="space-y-2">
-                <h3 className="text-sm font-medium text-gray-500">Priority</h3>
+              <div>
+                 <h3 className="text-sm font-medium text-gray-500">Priority</h3>
                 <Select 
                   defaultValue={issue.priority} 
                   onValueChange={onPriorityChange}
@@ -103,8 +103,8 @@ const IssueDetail = ({
                 </Select>
               </div>
               
-              <div className="space-y-2">
-                <h3 className="text-sm font-medium text-gray-500">Assigned To</h3>
+              <div>
+                 <h3 className="text-sm font-medium text-gray-500">Assigned To</h3>
                 <Select 
                   defaultValue={issue.assigneeId?.toString() || 'unassigned'} 
                   onValueChange={(value) => onAssigneeChange(value !== 'unassigned' ? parseInt(value) : null)}
@@ -124,8 +124,8 @@ const IssueDetail = ({
                 </Select>
               </div>
             </div>
-            
-            <div className="space-y-4">
+            <div className="w-full mt-4">
+             
               <div className="flex items-center gap-2">
                 <Badge className="bg-gray-100 text-gray-800 hover:bg-gray-200">
                   <i className={`fas fa-${getCategoryIcon(issue.category)} mr-1`}></i>
@@ -143,7 +143,7 @@ const IssueDetail = ({
                 </div>
               </div>
               
-              <div className="mt-4">
+              <div className="mt-2">
                 <h3 className="text-sm font-medium text-gray-700 mb-2">Description</h3>
                 <div className="text-gray-700 whitespace-pre-wrap break-words">
                   {issue.description}
