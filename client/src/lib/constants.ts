@@ -21,18 +21,22 @@ export const CATEGORY_LABELS = {
   missingAccess: 'Missing Access',
   invalidTestData: 'Invalid Test Data',
   notADefect: 'Not a Defect',
+  observation: 'Observation',
+  duplicate: 'Duplicate',
 };
 
 export const CATEGORY_COLORS = {
   bug: 'bg-red-100 text-red-800',
   feature: 'bg-blue-100 text-blue-800',
-  enhancement: 'bg-green-100 text-green-800',
-  task: 'bg-yellow-100 text-yellow-800',
+  security: 'bg-green-100 text-green-800',
+  performance: 'bg-yellow-100 text-yellow-800',
   documentation: 'bg-purple-100 text-purple-800',
-  question: 'bg-pink-100 text-pink-800',
+  environmentError: 'bg-pink-100 text-pink-800',
   duplicate: 'bg-gray-100 text-gray-800',
-  invalid: 'bg-orange-100 text-orange-800',
-  wontfix: 'bg-cyan-100 text-cyan-800',
+  missingAccess: 'bg-orange-100 text-orange-800',
+  notADefect: 'bg-cyan-100 text-cyan-800',
+  invalidTestData: 'bg-indigo-100 text-indigo-800',
+  observation: 'bg-teal-100 text-teal-800',
 };
 
 
