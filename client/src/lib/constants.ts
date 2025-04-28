@@ -23,6 +23,20 @@ export const CATEGORY_LABELS = {
   notADefect: 'Not a Defect',
 };
 
+export const CATEGORY_COLORS = {
+  bug: 'bg-red-100 text-red-800',
+  feature: 'bg-blue-100 text-blue-800',
+  enhancement: 'bg-green-100 text-green-800',
+  task: 'bg-yellow-100 text-yellow-800',
+  documentation: 'bg-purple-100 text-purple-800',
+  question: 'bg-pink-100 text-pink-800',
+  duplicate: 'bg-gray-100 text-gray-800',
+  invalid: 'bg-orange-100 text-orange-800',
+  wontfix: 'bg-cyan-100 text-cyan-800',
+};
+
+
+
 export const TEAM_LABELS = {
   compass: 'Compass',
   meta: 'Meta',

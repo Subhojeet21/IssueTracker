@@ -22,7 +22,7 @@ import IssueStatusBadge from '@/components/dashboard/IssueStatusBadge';
 import IssuePriorityBadge from '@/components/dashboard/IssuePriorityBadge';
 import { Issue } from '@shared/schema';
 import { formatDate, generateIssueId, getInitials, getCategoryIcon } from '@/lib/utils';
-import { CATEGORY_LABELS, TEAM_LABELS, ENVIRONMENT_LABELS } from '@/lib/constants';
+import { CATEGORY_LABELS, TEAM_LABELS, ENVIRONMENT_LABELS, CATEGORY_COLORS } from '@/lib/constants';
 import { Badge } from '@/components/ui/badge';
 
 interface IssueTableProps {
@@ -90,13 +90,13 @@ const IssueTable = ({ issues, isLoading = false }: IssueTableProps) => {
                   <TableCell>
                     <IssuePriorityBadge priority={issue.priority} />
                   </TableCell>
-                  <TableCell className="text-gray-500">
-                    <Badge className="bg-gray-100 text-gray-800 hover:bg-gray-200">
+                  <TableCell>
+                    <Badge className={`${CATEGORY_COLORS[issue.category]} hover:bg-gray-200`}>
                       <i className={`fas fa-${getCategoryIcon(issue.category)} mr-1`}></i>
                       {CATEGORY_LABELS[issue.category]}
                     </Badge>
                     {/*{CATEGORY_LABELS[issue.category]}*/}
-                  </TableCell>
+                   </TableCell>
                   <TableCell className="text-gray-500">
                     {TEAM_LABELS[issue.team]}
                   </TableCell>
