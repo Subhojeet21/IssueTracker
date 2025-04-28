@@ -132,7 +132,8 @@ export const TrendChart = ({ issues, isLoading, isError }: TrendChartProps) => {
     return Object.entries(weeklyData).map(([week, counts]) => ({
       week,
       ...counts,
-    }));
+    }))
+    .sort((a, b) => a.week.localeCompare(b.week)); // Sort by week in ascending order;
   }, [issues]);
   
     if (isLoading) {
