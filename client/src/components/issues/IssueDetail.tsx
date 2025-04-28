@@ -48,7 +48,7 @@ const IssueDetail = ({
       <CardHeader className="pb-3">
         <CardTitle className="text-xl">{issue.title}</CardTitle>
       </CardHeader>
-      <CardContent className="">
+      <CardContent className="overflow-hidden">
         <Tabs value={selectedTab} onValueChange={setSelectedTab}>
           <TabsList className="mb-4">
             <TabsTrigger value="details">Details</TabsTrigger>
