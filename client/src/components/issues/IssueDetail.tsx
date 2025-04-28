@@ -48,8 +48,8 @@ const IssueDetail = ({
       <CardHeader className="pb-3">
         <CardTitle className="text-xl">{issue.title}</CardTitle>
       </CardHeader>
-      <CardContent className="overflow-hidden">
-        <Tabs value={selectedTab} onValueChange={setSelectedTab}>
+      <CardContent >
+        <Tabs value={selectedTab} onValueChange={setSelectedTab} >
           <TabsList className="mb-4">
             <TabsTrigger value="details">Details</TabsTrigger>
             <TabsTrigger value="attachments">
@@ -61,8 +61,7 @@ const IssueDetail = ({
               )}
             </TabsTrigger>
           </TabsList>
-          
-          <TabsContent value="details">
+          <TabsContent className="overflow-x-hidden" value="details">
             <div className="grid gap-6 grid-cols-1 md:grid-cols-3 mb-6">
               <div className="space-y-2">
                 <h3 className="text-sm font-medium text-gray-500">Status</h3>
