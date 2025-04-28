@@ -149,6 +149,10 @@ const IssueDetailPage = ({ id }: IssueDetailPageProps) => {
     updateIssueMutation.mutate({ priority });
   };
   
+  const handleCategoryChange = (category: string) => {
+    updateIssueMutation.mutate({ category });
+  };
+  
   const handleAssigneeChange = (assigneeId: number | null) => {
     updateIssueMutation.mutate({ 
       assigneeId: assigneeId === null ? null : assigneeId 
@@ -185,6 +189,7 @@ const IssueDetailPage = ({ id }: IssueDetailPageProps) => {
         onStatusChange={handleStatusChange}
         onPriorityChange={handlePriorityChange}
         onAssigneeChange={handleAssigneeChange}
+        onCategoryChange={handleCategoryChange}
         isPending={updateIssueMutation.isPending}
       />
       
