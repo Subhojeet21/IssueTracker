@@ -146,7 +146,7 @@ const IssueDetail = ({
               
               <div className="mt-4">
                 <h3 className="text-sm font-medium text-gray-700 mb-2">Description</h3>
-                <div className="text-gray-700 whitespace-pre-wrap" style={{ wordWrap: 'break-word', overflowWrap: 'break-word' }}>
+                <div className="text-gray-700 whitespace-pre-wrap break-words">
                   {issue.description}
                 </div>
               </div>
