@@ -61,8 +61,8 @@ const IssueDetail = ({
               )}
             </TabsTrigger>
           </TabsList>
-          <TabsContent className="overflow-x-hidden" value="details">
-            <div className="w-full ">
+          <TabsContent value="details">
+            <div>
               <div>
                 <h3 className="text-sm font-medium text-gray-500">Status</h3>
                 <Select 
@@ -124,7 +124,7 @@ const IssueDetail = ({
                 </Select>
               </div>
             </div>
-            <div className="w-full mt-4">
+            <div className="mt-4">
              
               <div className="flex items-center gap-2">
                 <Badge className="bg-gray-100 text-gray-800 hover:bg-gray-200">
@@ -143,9 +143,9 @@ const IssueDetail = ({
                 </div>
               </div>
               
-              <div className="mt-2">
+              <div className="mt-2" >
                 <h3 className="text-sm font-medium text-gray-700 mb-2">Description</h3>
-                <div className="text-gray-700 whitespace-pre-wrap break-words">
+                <div className="text-gray-700 whitespace-pre-wrap break-words break-all overflow-x-hidden">
                   {issue.description}
                 </div>
               </div>
