@@ -8,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Issue, Attachment } from '@shared/schema';
 import IssueStatusBadge from '@/components/dashboard/IssueStatusBadge';
 import IssuePriorityBadge from '@/components/dashboard/IssuePriorityBadge';
-import { getStatusOptions, getPriorityOptions, getInitials, getCategoryIcon } from '@/lib/utils';
+import { getStatusOptions, getPriorityOptions, getInitials, getCategoryIcon, getCategoryOptions } from '@/lib/utils';
 import { CATEGORY_LABELS } from '@/lib/constants';
 import { FileText, Paperclip } from 'lucide-react';
 
@@ -18,6 +18,7 @@ interface IssueDetailProps {
   onStatusChange: (status: string) => void;
   onPriorityChange: (priority: string) => void;
   onAssigneeChange: (assigneeId: number | null) => void;
+  onCategoryChange: (category: string) => void;
   isPending?: boolean;
 }
 
@@ -27,6 +28,7 @@ const IssueDetail = ({
   onStatusChange, 
   onPriorityChange, 
   onAssigneeChange,
+  onCategoryChange,
   isPending = false
 }: IssueDetailProps) => {
   const [selectedTab, setSelectedTab] = useState('details');
@@ -63,7 +65,7 @@ const IssueDetail = ({
           </TabsList>
           <TabsContent value="details">
             <div>
-            <div className="grid grid-cols-3 gap-4 mb-4">
+            <div className="grid grid-cols-4 gap-4 mb-4">
               <div>
                 <h3 className="text-sm font-medium text-gray-500">Status</h3>
                 <Select 
@@ -124,6 +126,27 @@ const IssueDetail = ({
                   </SelectContent>
                 </Select>
               </div>
+
+              <div>
+                 <h3 className="text-sm font-medium text-gray-500">Category</h3>
+                <Select 
+                  defaultValue={issue.category} 
+                  onValueChange={onCategoryChange}
+                  disabled={isPending}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Unassigned" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {getCategoryOptions().map(category => (
+                      <SelectItem key={category.value} value={category.value}>
+                        {category.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
               </div>
             </div>
             <div className="mt-4">
