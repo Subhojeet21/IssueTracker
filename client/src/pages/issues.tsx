@@ -43,7 +43,7 @@ const Issues = () => {
       <div className="mb-6 space-y-4">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-semibold text-gray-900">Issues</h1>
+            <h1 className="text-2xl font-semibold text-gray-900">All Issues</h1>
             <p className="text-sm text-gray-500">View and manage all issues</p>
           </div>
           <Button
