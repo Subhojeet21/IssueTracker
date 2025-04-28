@@ -20,6 +20,7 @@ import {
 import { Eye, Edit, UserPlus } from 'lucide-react';
 import IssueStatusBadge from '@/components/dashboard/IssueStatusBadge';
 import IssuePriorityBadge from '@/components/dashboard/IssuePriorityBadge';
+import IssueCategoryBadge from '@/components/dashboard/IssueCategoryBadge';
 import { Issue } from '@shared/schema';
 import { formatDate, generateIssueId, getInitials } from '@/lib/utils';
 import { CATEGORY_LABELS, TEAM_LABELS, ENVIRONMENT_LABELS } from '@/lib/constants';
@@ -90,7 +91,8 @@ const IssueTable = ({ issues, isLoading = false }: IssueTableProps) => {
                     <IssuePriorityBadge priority={issue.priority} />
                   </TableCell>
                   <TableCell className="text-gray-500">
-                    {CATEGORY_LABELS[issue.category]}
+                    <IssueCategoryBadge category={issue.category} />
+                    {/*{CATEGORY_LABELS[issue.category]}*/}
                   </TableCell>
                   <TableCell className="text-gray-500">
                     {TEAM_LABELS[issue.team]}
