@@ -9,7 +9,7 @@ import { Issue, Attachment } from '@shared/schema';
 import IssueStatusBadge from '@/components/dashboard/IssueStatusBadge';
 import IssuePriorityBadge from '@/components/dashboard/IssuePriorityBadge';
 import { getStatusOptions, getPriorityOptions, getInitials, getCategoryIcon, getCategoryOptions } from '@/lib/utils';
-import { CATEGORY_LABELS } from '@/lib/constants';
+import { CATEGORY_LABELS, CATEGORY_COLORS } from '@/lib/constants';
 import { FileText, Paperclip } from 'lucide-react';
 
 interface IssueDetailProps {
@@ -152,7 +152,11 @@ const IssueDetail = ({
             <div className="mt-4">
              
               <div className="flex items-center gap-2">
-                <Badge className="bg-gray-100 text-gray-800 hover:bg-gray-200">
+                {/*<Badge className="bg-gray-100 text-gray-800 hover:bg-gray-200">
+                  <i className={`fas fa-${getCategoryIcon(issue.category)} mr-1`}></i>
+                  {CATEGORY_LABELS[issue.category]}
+                </Badge>*/}
+                <Badge className={`${CATEGORY_COLORS[issue.category]} hover:bg-gray-200`}>
                   <i className={`fas fa-${getCategoryIcon(issue.category)} mr-1`}></i>
                   {CATEGORY_LABELS[issue.category]}
                 </Badge>
