@@ -34,9 +34,13 @@ const Dashboard = () => {
   });
 
   // Filter recent issues (last 5)
-  const recentIssues = [...issues].sort((a, b) =>
+  {/*const recentIssues = [...issues].sort((a, b) =>
     new Date(b.createdAt || '').getTime() - new Date(a.createdAt || '').getTime()
-  ).slice(0, 5);
+  ).slice(0, 5);*/}
+  const recentIssues = [...issues]
+  .filter(issue => (issue.status === "open" || issue.status === "in_progress")) // Filter by status
+  .sort((a, b) => new Date(b.createdAt || '').getTime() - new Date(a.createdAt || '').getTime()) // Sort by creation date
+  .slice(0, 5); // Get the most recent 5
 
   if (!user) return null;
 
