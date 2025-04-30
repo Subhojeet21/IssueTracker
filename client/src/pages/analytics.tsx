@@ -24,7 +24,7 @@ interface AnalyticsData {
 
 const Analytics = () => {
   const { toast } = useToast();
-  const [timeRange, setTimeRange] = useState('30');
+  const [timeRange, setTimeRange] = useState('all');
   const [activeTab, setActiveTab] = useState('overview');
   
   const { filters } = useFilter();
