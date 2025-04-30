@@ -154,6 +154,10 @@ export const CategoryChart = ({ data, timeRange, onTimeRangeChange }: CategoryCh
             beginAtZero: true,
             ticks: {
               precision: 0
+            },
+            title: {
+              display: true,
+              text: 'Count'
             }
           }
         },
