@@ -453,7 +453,7 @@ export const SprintIssuesChart = ({ issues }: SprintIssuesChartProps) => {
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: false
+            display: true
           },
           title: {
             display: true,
