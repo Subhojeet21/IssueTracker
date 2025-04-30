@@ -431,7 +431,7 @@ export const SprintIssuesChart = ({ issues }: SprintIssuesChartProps) => {
     chartInstance.current = new Chart(chartRef.current, {
       type: 'bar',
       data: {
-        labels,
+        labels: aggregatedData.map(item => item.sprint),
         datasets: [
           {
             label: "Number of Issues",
