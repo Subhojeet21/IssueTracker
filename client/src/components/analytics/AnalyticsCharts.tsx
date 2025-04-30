@@ -435,7 +435,7 @@ export const SprintIssuesChart = ({ issues }: SprintIssuesChartProps) => {
         datasets: [
           {
             label: "Number of Issues",
-            data,
+            data: aggregatedData.map(item => item.numberOfIssues),
             backgroundColor: sprintColors,
             borderColor: [
               'rgba(255, 99, 132, 1)',
