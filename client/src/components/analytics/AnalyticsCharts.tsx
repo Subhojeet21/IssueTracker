@@ -431,11 +431,11 @@ export const SprintIssuesChart = ({ issues }: SprintIssuesChartProps) => {
     chartInstance.current = new Chart(chartRef.current, {
       type: 'bar',
       data: {
-        labels,
+        labels: aggregatedData.map(item => item.sprint),
         datasets: [
           {
             label: "Number of Issues",
-            data,
+            data: aggregatedData.map(item => item.numberOfIssues),
             backgroundColor: sprintColors,
             borderColor: [
               'rgba(255, 99, 132, 1)',
@@ -453,22 +453,15 @@ export const SprintIssuesChart = ({ issues }: SprintIssuesChartProps) => {
         maintainAspectRatio: false,
         plugins: {
           legend: {
+            display: true
+          },
+          title: {
             display: true,
-            labels: {
-              generateLabels: function(chart) {
-                return chart.data.datasets[0]?.data.map((value, index) => ({
-                  text: `${labels[index]}: ${value}`, // Dynamically show X-label + count
-                  fillStyle: Array.isArray(chart.data.datasets[0].backgroundColor) ? chart.data.datasets[0].backgroundColor[index] : chart.data.datasets[0].backgroundColor
-                }));              
-              }
-            },
-            title: {
-              display: true,
-              text: 'Number of Issues by Sprint',
-              font: {
-                size: 16
-              }
+            text: 'Number of Issues by Sprint',
+            font: {
+              size: 16
             }
+          }
         },
         scales: {
           y: {
