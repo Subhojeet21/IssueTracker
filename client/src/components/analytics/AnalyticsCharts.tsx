@@ -431,11 +431,11 @@ export const SprintIssuesChart = ({ issues }: SprintIssuesChartProps) => {
     chartInstance.current = new Chart(chartRef.current, {
       type: 'bar',
       data: {
-        labels,
+        labels: labels,
         datasets: [
           {
             label: "Number of Issues",
-            data,
+            data: data,
             backgroundColor: sprintColors,
             borderColor: [
               'rgba(255, 99, 132, 1)',
