@@ -30,6 +30,7 @@ export const issues = pgTable("issues", {
   category: categoryEnum("category").notNull(),
   team: teamEnum("team").notNull(),
   environment: environmentEnum("environment").notNull(),
+  sprint: text("sprint").notNull(),
   assigneeId: integer("assignee_id").references(() => users.id),
   reporterId: integer("reporter_id").references(() => users.id).notNull(),
   createdAt: timestamp("created_at").defaultNow(),

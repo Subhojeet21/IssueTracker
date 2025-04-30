@@ -44,6 +44,7 @@ const IssueForm = ({ open, onClose }: IssueFormProps) => {
       environment: "dev",
       assigneeId: undefined,
       reporterId: user?.id,
+      sprint: "",
     },
   });
 
@@ -278,6 +279,20 @@ const IssueForm = ({ open, onClose }: IssueFormProps) => {
                         <SelectItem value="prod">PROD</SelectItem>
                       </SelectContent>
                     </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="sprint"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Sprint Name</FormLabel>
+                    <FormControl>
+                      <Input {...field} placeholder="Enter sprint name" />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
