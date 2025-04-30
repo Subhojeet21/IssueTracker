@@ -431,11 +431,11 @@ export const SprintIssuesChart = ({ issues }: SprintIssuesChartProps) => {
     chartInstance.current = new Chart(chartRef.current, {
       type: 'bar',
       data: {
-        labels: aggregatedData.map(item => item.sprint),
+        labels,
         datasets: [
           {
             label: "Number of Issues",
-            data: aggregatedData.map(item => item.numberOfIssues),
+            data,
             backgroundColor: sprintColors,
             borderColor: [
               'rgba(255, 99, 132, 1)',
@@ -453,7 +453,12 @@ export const SprintIssuesChart = ({ issues }: SprintIssuesChartProps) => {
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: true
+            display: true,
+            position: 'bottom',
+            labels: {
+              padding: 20,
+              usePointStyle: true
+            }
           },
           title: {
             display: true,
