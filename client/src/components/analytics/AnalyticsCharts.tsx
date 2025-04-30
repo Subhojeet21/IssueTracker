@@ -330,7 +330,20 @@ export const ResolutionTimeChart = ({ issues }: ResolutionTimeChartProps) => {
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: false
+            display: true,
+            position: 'bottom',
+            labels: {
+              padding: 20,
+              usePointStyle: true,
+              generateLabels: function(chart) {
+                return chart.data.datasets[0]?.data.map((value, index) => ({
+                  text: `${chart.data.labels?.[index] || ''}: ${value}`,
+                  fillStyle: Array.isArray(chart.data.datasets[0].backgroundColor) 
+                    ? chart.data.datasets[0].backgroundColor[index] 
+                    : chart.data.datasets[0].backgroundColor
+                }));              
+              }
+            }
           },
           title: {
             display: true,
