@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { StatusChart, CategoryChart } from '@/components/dashboard/Charts';
-import { PriorityChart, TrendChart, ResolutionTimeChart } from '@/components/analytics/AnalyticsCharts';
+import { PriorityChart, TrendChart, ResolutionTimeChart, SprintIssuesChart } from '@/components/analytics/AnalyticsCharts';
 import { Download } from 'lucide-react';
 import { useAnalytics } from '@/hooks/use-analytics';
 import { useToast } from '@/hooks/use-toast';
@@ -229,6 +229,8 @@ const Analytics = () => {
         
         <TabsContent value="trends" className="grid grid-cols-1 gap-6">
           <TrendChart issues={issues} isLoading={isLoadingIssues} isError={isErrorIssues} />
+
+          <SprintIssuesChart issues={issues} isLoading={isLoadingIssues} isError={isErrorIssues} />
         </TabsContent>
         
         <TabsContent value="performance" className="grid grid-cols-1 gap-6">

@@ -372,3 +372,126 @@ export const ResolutionTimeChart = ({ issues }: ResolutionTimeChartProps) => {
     </Card>
   );
 };
+
+interface SprintIssuesChartProps {
+  issues: Issue[];
+}
+
+export const SprintIssuesChart = ({ issues }: SprintIssuesChartProps) => {
+  const chartRef = useRef<HTMLCanvasElement>(null);
+  const chartInstance = useRef<Chart | null>(null);
+
+  const aggregatedData = useMemo(() => {
+    if (!issues || issues.length === 0) {
+      return [];
+    }
+
+    const sprintData: Record<string, { count: number }> = {};
+    const sprints = new Set<string>();
+
+    issues.forEach((issue) => {
+      sprints.add(issue.sprint);
+
+      if (issue.updatedAt && (issue.status === 'closed')) {
+        if (!sprintData[issue.sprint]) {
+          sprintData[issue.sprint] = { count: 0 };
+        }
+        sprintData[issue.sprint].count++;
+      }
+    });
+
+    const formattedData = Object.entries(sprintData).map(([sprint, data]) => {
+      return {
+        sprint,
+        numberOfIssues: data.count,
+      };
+    });
+
+    return formattedData;
+  }, [issues]);
+
+  useEffect(() => {
+
+    if (!chartRef.current) return;
+
+    if (chartInstance.current) chartInstance.current.destroy();
+    
+    const labels = aggregatedData.map(item => item.sprint);
+    const data = aggregatedData.map(item => item.numberOfIssues);
+    
+    const sprintColors = [
+      'rgba(255, 99, 132, 0.7)',   // red
+      'rgba(54, 162, 235, 0.7)',  // blue
+      'rgba(255, 206, 86, 0.7)',  // yellow
+      'rgba(75, 192, 192, 0.7)',  // green
+      'rgba(153, 102, 255, 0.7)', // purple
+      'rgba(255, 159, 64, 0.7)'   // orange
+    ];
+    
+    chartInstance.current = new Chart(chartRef.current, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "Number of Issues",
+            data,
+            backgroundColor: sprintColors,
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+            ],
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: 'Number of Issues by Sprint',
+            font: {
+              size: 16
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Count'
+            }
+          }
+        }
+      }
+    });
+    
+    return () => {
+      if (chartInstance.current) {
+        chartInstance.current.destroy();
+      }
+    };
+  }, [aggregatedData]);
+  
+  return (
+    <Card>
+      <CardHeader className="pb-2">
+        <CardTitle className="text-lg font-medium">Sprint-Wise Issue Analysis</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="h-[400px]">
+          <canvas ref={chartRef}></canvas>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
