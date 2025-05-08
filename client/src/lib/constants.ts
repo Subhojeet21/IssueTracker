@@ -23,7 +23,7 @@ export const CATEGORY_LABELS = {
   notADefect: 'Not a Defect',
   observation: 'Observation',
   duplicate: 'Duplicate',
-  outofteamscope: 'Out of Team Scope',
+  outOfTeamScope: 'Out of Team Scope',
 };
 
 export const CATEGORY_COLORS = {
@@ -38,7 +38,7 @@ export const CATEGORY_COLORS = {
   notADefect: 'bg-cyan-100 text-cyan-800',
   invalidTestData: 'bg-indigo-100 text-indigo-800',
   observation: 'bg-teal-100 text-teal-800',
-  outofteamscope: 'bg-gray-100 text-magenta-800',
+  outOfTeamScope: 'bg-gray-100 text-magenta-800',
 };
 
 

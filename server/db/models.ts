@@ -33,7 +33,7 @@ const issueSchema = new Schema({
   },
   category: { 
     type: String, 
-    enum: ['bug', 'feature', 'documentation', 'security', 'performance', 'environmentError', 'missingAccess','invalidTestData','notADefect','observation','duplicate','outofteamscope'],
+    enum: ['bug', 'feature', 'documentation', 'security', 'performance', 'environmentError', 'missingAccess','invalidTestData','notADefect','observation','duplicate','outOfTeamScope'],
     default: 'bug'
   },
   team: {

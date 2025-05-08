@@ -5,7 +5,7 @@ import { z } from "zod";
 // Enums
 export const priorityEnum = pgEnum('priority', ['high', 'medium', 'low']);
 export const statusEnum = pgEnum('status', ['open', 'in_progress', 'resolved', 'closed']);
-export const categoryEnum = pgEnum('category', ['bug', 'feature', 'documentation', 'security', 'performance','environmentError','missingAccess','invalidTestData','notADefect','observation','duplicate','outofteamscope']);
+export const categoryEnum = pgEnum('category', ['bug', 'feature', 'documentation', 'security', 'performance','environmentError','missingAccess','invalidTestData','notADefect','observation','duplicate','outOfTeamScope']);
 export const teamEnum = pgEnum('team', ['compass', 'meta', 'everest']);
 export const environmentEnum = pgEnum('environment', ['dev', 'int', 'stg', 'prod']);
 
@@ -114,7 +114,7 @@ export type InsertNotification = z.infer<typeof insertNotificationSchema>;
 // Enum values for frontend usage
 export const PRIORITY_VALUES = ['high', 'medium', 'low'] as const;
 export const STATUS_VALUES = ['open', 'in_progress', 'resolved', 'closed'] as const;
-export const CATEGORY_VALUES = ['bug', 'feature', 'documentation', 'security', 'performance', 'environmentError','missingAccess','invalidTestData','notADefect','observation','duplicate','outofteamscope'] as const;
+export const CATEGORY_VALUES = ['bug', 'feature', 'documentation', 'security', 'performance', 'environmentError','missingAccess','invalidTestData','notADefect','observation','duplicate','outOfTeamScope'] as const;
 export const TEAM_VALUES = ['compass', 'meta', 'everest'] as const;
 export const ENVIRONMENT_VALUES = ['dev', 'int', 'stg', 'prod'] as const;
 
