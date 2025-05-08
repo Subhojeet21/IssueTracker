@@ -38,7 +38,7 @@ export const CATEGORY_COLORS = {
   notADefect: 'bg-cyan-100 text-cyan-800',
   invalidTestData: 'bg-indigo-100 text-indigo-800',
   observation: 'bg-teal-100 text-teal-800',
-  outOfTeamScope: 'bg-red-100 text-red-800',
+  outOfTeamScope: 'bg-yellow-100 text-yellow-800',
 };
 
 
