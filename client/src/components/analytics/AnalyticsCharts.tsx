@@ -428,7 +428,7 @@ export const SprintIssuesChart = ({ issues }: SprintIssuesChartProps) => {
       };
     });
 
-    return formattedData;
+    return formattedData.sort((a, b) => a.sprint.localeCompare(b.sprint)); // Sort by week in ascending order;
   }, [issues]);
 
   useEffect(() => {
