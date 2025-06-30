@@ -29,11 +29,20 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({ options, value, onChan
 
   const selectedLabels = options.filter(opt => value.includes(opt.value)).map(opt => opt.label);
 
+  let buttonLabel = placeholder || 'Select...';
+  if (selectedLabels.length === 1) {
+    buttonLabel = selectedLabels[0];
+  } else if (selectedLabels.length === 2) {
+    buttonLabel = selectedLabels.join(', ');
+  } else if (selectedLabels.length > 2) {
+    buttonLabel = `${selectedLabels.length} selected`;
+  }
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button variant="outline" className={className} type="button">
-          {selectedLabels.length > 0 ? selectedLabels.join(', ') : (placeholder || 'Select...')}
+          {buttonLabel}
         </Button>
       </PopoverTrigger>
       <PopoverContent align="start" className="w-56 p-2">
