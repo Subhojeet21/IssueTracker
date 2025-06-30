@@ -11,7 +11,7 @@ import { PriorityChart, TrendChart, ResolutionTimeChart, SprintIssuesChart } fro
 import { Download } from 'lucide-react';
 import { useAnalytics } from '@/hooks/use-analytics';
 import { useToast } from '@/hooks/use-toast';
-import { MultiSelect } from '@/components/ui/select';
+import { MultiSelect } from '@/components/ui/multiselect';
 
 interface AnalyticsData {
   byStatus: Record<string, number>;
