@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Issue } from '@shared/schema';
 import { useFilter } from '@/hooks/use-filter';
@@ -11,6 +11,7 @@ import { PriorityChart, TrendChart, ResolutionTimeChart, SprintIssuesChart } fro
 import { Download } from 'lucide-react';
 import { useAnalytics } from '@/hooks/use-analytics';
 import { useToast } from '@/hooks/use-toast';
+import { MultiSelect } from '@/components/ui/select';
 
 interface AnalyticsData {
   byStatus: Record<string, number>;
@@ -26,6 +27,7 @@ const Analytics = () => {
   const { toast } = useToast();
   const [timeRange, setTimeRange] = useState('all');
   const [activeTab, setActiveTab] = useState('overview');
+  const [selectedSprints, setSelectedSprints] = useState<string[]>([]);
   
   const { filters } = useFilter();
   const { issues, isLoading: isLoadingIssues, isError: isErrorIssues } = useAnalytics();
@@ -47,6 +49,55 @@ const Analytics = () => {
     }
   });
   
+  // Extract unique sprints from issues
+  const sprintOptions = useMemo(() => {
+    if (!issues) return [];
+    const sprints = Array.from(new Set(issues.map(issue => issue.sprint)));
+    return sprints.sort();
+  }, [issues]);
+
+  // Filter issues by selected sprints
+  const filteredIssues = useMemo(() => {
+    if (!selectedSprints.length) return issues;
+    return issues.filter(issue => selectedSprints.includes(issue.sprint));
+  }, [issues, selectedSprints]);
+
+  // Compute summary data from filtered issues
+  const filteredSummary = useMemo(() => {
+    const byStatus: Record<string, number> = {};
+    const byPriority: Record<string, number> = {};
+    const byCategory: Record<string, number> = {};
+    let totalIssues = 0;
+    let openIssues = 0;
+    let resolvedIssues = 0;
+    let totalResolutionTime = 0;
+    let resolvedCount = 0;
+    filteredIssues.forEach(issue => {
+      totalIssues++;
+      byStatus[issue.status] = (byStatus[issue.status] || 0) + 1;
+      byPriority[issue.priority] = (byPriority[issue.priority] || 0) + 1;
+      byCategory[issue.category] = (byCategory[issue.category] || 0) + 1;
+      if (issue.status === 'open') openIssues++;
+      if (issue.status === 'resolved' || issue.status === 'closed') {
+        resolvedIssues++;
+        if (issue.createdAt && issue.updatedAt) {
+          const created = new Date(issue.createdAt).getTime();
+          const resolved = new Date(issue.updatedAt).getTime();
+          totalResolutionTime += (resolved - created) / (1000 * 60 * 60 * 24); // days
+          resolvedCount++;
+        }
+      }
+    });
+    return {
+      byStatus,
+      byPriority,
+      byCategory,
+      totalIssues,
+      openIssues,
+      resolvedIssues,
+      avgResolutionTime: resolvedCount ? (totalResolutionTime / resolvedCount).toFixed(1) : 0,
+    };
+  }, [filteredIssues]);
   
   const handleExportCSV = () => {
     if (!data) return;
@@ -149,7 +200,14 @@ const Analytics = () => {
               <SelectItem value="all">All time</SelectItem>
             </SelectContent>
           </Select>
-          
+          {/* Sprint MultiSelect */}
+          <MultiSelect
+            options={sprintOptions.map(s => ({ label: s, value: s }))}
+            value={selectedSprints}
+            onChange={setSelectedSprints}
+            placeholder="Filter by sprint(s)"
+            className="w-[200px]"
+          />
           <Button 
             variant="outline"
             className="flex items-center"
@@ -165,11 +223,11 @@ const Analytics = () => {
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-gray-500">Total Issues</CardTitle>
-            <div className="text-2xl font-bold text-gray-900">{data.totalIssues}</div>
+            <div className="text-2xl font-bold text-gray-900">{filteredSummary.totalIssues}</div>
           </CardHeader>
           <CardContent>
             <div className="text-xs text-gray-500">
-              {data.openIssues} open, {data.resolvedIssues} resolved
+              {filteredSummary.openIssues} open, {filteredSummary.resolvedIssues} resolved
             </div>
           </CardContent>
         </Card>
@@ -178,7 +236,7 @@ const Analytics = () => {
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-gray-500">Open Rate</CardTitle>
             <div className="text-2xl font-bold text-gray-900">
-              {data.totalIssues ? Math.round((data.openIssues / data.totalIssues) * 100) : 0}%
+              {filteredSummary.totalIssues ? Math.round((filteredSummary.openIssues / filteredSummary.totalIssues) * 100) : 0}%
             </div>
           </CardHeader>
           <CardContent>
@@ -191,7 +249,7 @@ const Analytics = () => {
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-gray-500">Avg. Resolution Time</CardTitle>
-            <div className="text-2xl font-bold text-gray-900">{data.avgResolutionTime} days</div>
+            <div className="text-2xl font-bold text-gray-900">{filteredSummary.avgResolutionTime} days</div>
           </CardHeader>
           <CardContent>
             <div className="text-xs text-gray-500">
@@ -210,31 +268,31 @@ const Analytics = () => {
         
         <TabsContent value="overview" className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <StatusChart 
-            data={data.byStatus} 
+            data={filteredSummary.byStatus} 
             timeRange={timeRange}
             onTimeRangeChange={setTimeRange}
           />
           
           <CategoryChart 
-            data={data.byCategory} 
+            data={filteredSummary.byCategory} 
             timeRange={timeRange}
             onTimeRangeChange={setTimeRange}
           />
           
           <PriorityChart 
-            data={data.byPriority} 
+            data={filteredSummary.byPriority} 
             timeRange={timeRange}
           />
         </TabsContent>
         
         <TabsContent value="trends" className="grid grid-cols-1 gap-6">
-          <TrendChart issues={issues} isLoading={isLoadingIssues} isError={isErrorIssues} />
+          <TrendChart issues={filteredIssues} isLoading={isLoadingIssues} isError={isErrorIssues} />
 
-          <SprintIssuesChart issues={issues} isLoading={isLoadingIssues} isError={isErrorIssues} />
+          <SprintIssuesChart issues={filteredIssues} />
         </TabsContent>
         
         <TabsContent value="performance" className="grid grid-cols-1 gap-6">
-          <ResolutionTimeChart issues={issues} />
+          <ResolutionTimeChart issues={filteredIssues} />
         </TabsContent>
       </Tabs>
     </div>
